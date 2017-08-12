@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import '../App.css';
+import $ from 'jquery'
 
 class Register extends Component {
     render() {
         return (
             <div className="col-md-4">
-                <form>
+                <form onSubmit={this.onRegisterClick.bind(this)}>
                     <div className="modal-body">
                         <div className="form-group">
                             <input className="form-control" type="text"
-                                   placeholder="Name" required/>
+                                   placeholder="Name" ref="reg_name" required/>
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="email" placeholder="Email" required/>
+                            <input className="form-control" type="email" placeholder="Email" ref="reg_email" required/>
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="password" placeholder="Password"
+                            <input className="form-control" type="password" placeholder="Password" ref="reg_password"
                                    required/>
                         </div>
                     </div>
@@ -34,13 +35,25 @@ class Register extends Component {
         );
     }
 
-    onSubmitClick(event) {
+    onRegisterClick(event) {
         event.preventDefault();
-        const name = this.refs.name.value;
-        const email = this.refs.email.value;
+        const name = this.refs.reg_name.value;
+        const email = this.refs.reg_email.value;
+        const password = this.refs.reg_password.value;
 
-        console.log(name);
-        console.log(email);
+        $.ajax({
+            type: "POST",
+            url: 'https://patrickluboobi-bucket-list-api.herokuapp.com/auth/register',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            data: JSON.stringify({name: name, email: email, password: password}),
+            success: function (response) {
+                console.log(response['id']);
+                window.location = '/buckets';
+            }
+        })
+
     }
 
 }
