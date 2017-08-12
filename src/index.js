@@ -5,16 +5,21 @@ import './index.css';
 import App from './App';
 import Login from './components/login';
 import Register from './components/register';
+import ForgotPassword from './components/forgot_password';
 import Buckets from './components/buckets';
 import registerServiceWorker from './registerServiceWorker';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
 
 ReactDOM.render(
     <BrowserRouter>
         <div>
-            {/*<Route path='/' component={App}/>*/}
+            <Route path='/' component={App}/>
             <Route path='/buckets' component={Buckets}/>
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
+            <Route path='/forgot-password' component={ForgotPassword}/>
         </div>
     </BrowserRouter>
 
