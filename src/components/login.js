@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
-import {Link, Redirect} from 'react-router-dom'
-import Buckets from './buckets'
+import {Link} from 'react-router-dom'
 import $ from 'jquery'
 
 class Login extends Component {
@@ -41,8 +40,7 @@ class Login extends Component {
         const email = this.refs.login_email.value;
         const password = this.refs.login_password.value;
 
-        $.ajax
-        ({
+        $.ajax({
             type: "POST",
             url: 'https://patrickluboobi-bucket-list-api.herokuapp.com/auth/login',
             dataType: 'json',
