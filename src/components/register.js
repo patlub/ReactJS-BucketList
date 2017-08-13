@@ -6,31 +6,44 @@ import $ from 'jquery'
 class Register extends Component {
     render() {
         return (
-            <div className="col-md-4">
-                <form onSubmit={this.onRegisterClick.bind(this)}>
-                    <div className="modal-body">
-                        <div className="form-group">
-                            <input className="form-control" type="text"
-                                   placeholder="Name" ref="reg_name" required/>
+            <div className="container-fluid text-center ">
+                <div className="col-md-4 col-md-offset-4 col-sm-9 auth-box" align="center">
+                    <div className="panel panel-primary">
+                        <div className="panel-heading">
+                            <h4 class="panel-title">Login or Sign up</h4>
                         </div>
-                        <div className="form-group">
-                            <input className="form-control" type="email" placeholder="Email" ref="reg_email" required/>
-                        </div>
-                        <div className="form-group">
-                            <input className="form-control" type="password" placeholder="Password" ref="reg_password"
-                                   required/>
+                        <div className="panel-body">
+                            <form onSubmit={this.onRegisterClick.bind(this)}>
+                                <div className="modal-body">
+                                    <div className="form-group">
+                                        <input className="form-control" type="text"
+                                               placeholder="Name" ref="reg_name" required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input className="form-control" type="email" placeholder="Email" ref="reg_email"
+                                               required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input className="form-control" type="password" placeholder="Password"
+                                               ref="reg_password"
+                                               required/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div>
+                                        <button type="submit" className="btn btn-primary btn-lg btn-block">Register
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <Link to="login" type="button" className="btn btn-link">Login</Link>
+                                        <Link to="forgot-password" type="button" className="btn btn-link">Forgot
+                                            password</Link>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" className="btn btn-primary btn-lg btn-block">Register</button>
-                        </div>
-                        <div>
-                            <Link to="login" type="button" className="btn btn-link">Login</Link>
-                            <Link to="forgot-password" type="button" className="btn btn-link">Forgot password</Link>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         );
     }
