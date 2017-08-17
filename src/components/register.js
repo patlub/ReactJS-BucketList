@@ -7,7 +7,7 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false
+            loggedIn: localStorage.getItem('token')
         };
     }
 
@@ -72,17 +72,15 @@ class Register extends Component {
                 password: password
             })
             .then(function (response) {
-                console.log(response.status);
                 if (response.status === 201) {
-                    this.setState({loggedIn: true});
+                    localStorage.setItem('token', response.data.id);
+                    this.setState({loggedIn: response.data.id});
                 }
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
             });
-
     }
-
 }
 
 
