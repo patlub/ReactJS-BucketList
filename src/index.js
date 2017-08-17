@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Login from './components/login';
@@ -11,17 +11,12 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-
-ReactDOM.render(
-    <BrowserRouter>
+ReactDOM.render(<BrowserRouter>
         <div>
-            <Route path='/' component={App}/>
-            <Route path='/buckets' component={Buckets}/>
+            <Route path='/' component={Buckets}/>
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
-            <Route path='/forgot-password' component={ForgotPassword}/>
+            <Route path='/forgot_password' component={ForgotPassword}/>
         </div>
-    </BrowserRouter>
-
-    , document.getElementById('root'));
+    </BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
