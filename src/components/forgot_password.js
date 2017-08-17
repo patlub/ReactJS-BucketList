@@ -7,7 +7,7 @@ class ForgotPassword extends Component {
     render() {
         return (
             <div className="container-fluid text-center ">
-                <div className="col-md-4 col-md-offset-4 col-sm-9 auth-box" align="center">
+                <div className="col-md-4 col-md-offset-4 col-sm-9 auth-box">
                     <div className="panel panel-primary">
                         <div className="panel-heading">
                             <h4 className="panel-title">Forgot Password</h4>
