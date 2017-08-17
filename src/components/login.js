@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
-import {Link, Redirect} from 'react-router-dom'
-import $ from 'jquery'
-import Bucket from './buckets'
+import {Link, Redirect} from 'react-router-dom';
+import axiosInstance from './config';
 
 
 class Login extends Component {
@@ -61,21 +60,21 @@ class Login extends Component {
         event.preventDefault();
         const email = this.refs.login_email.value;
         const password = this.refs.login_password.value;
-        this.setState({loggedIn: true});
 
-        // $.ajax({
-        //     type: "POST",
-        //     url: 'https://patrickluboobi-bucket-list-api.herokuapp.com/auth/login',
-        //     dataType: 'json',
-        //     contentType: 'application/json; charset=utf-8',
-        //     async: false,
-        //     data: JSON.stringify({email: email, password: password}),
-        //     success: function (response) {
-        //         this.setState({loggedIn: true});
-        //         // window.location = '/buckets';
-        //     }.bind(this)
-        // })
+        axiosInstance.post('/auth/login',
+            {
+                email: email,
+                password: password
+            })
+            .then(function (response) {
+                console.log(response.status);
+                if (response.status === 201) {
+                    this.setState({loggedIn: true});
+                }
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
     }
-
 }
 export default Login;
