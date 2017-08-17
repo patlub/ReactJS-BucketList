@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import '../App.css';
-import $ from 'jquery'
-import Login from "./login";
-import Bucket from "./buckets";
+import axiosInstance from './config';
+
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -13,6 +12,9 @@ class Register extends Component {
     }
 
     render() {
+        if (this.state.loggedIn) {
+            return <Redirect to="/buckets"/>
+        }
 
         return (
             <div className="container-fluid text-center ">
@@ -63,24 +65,25 @@ class Register extends Component {
         const email = this.refs.reg_email.value;
         const password = this.refs.reg_password.value;
 
-        $.ajax({
-            type: "POST",
-            url: 'https://patrickluboobi-bucket-list-api.herokuapp.com/auth/register',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            async: false,
-            data: JSON.stringify({name: name, email: email, password: password}),
-            success: function (response) {
-                console.log(response['id']);
-                window.location = '/buckets';
-            }
-        })
+        axiosInstance.post('/auth/register',
+            {
+                name: name,
+                email: email,
+                password: password
+            })
+            .then(function (response) {
+                console.log(response.status);
+                if (response.status === 201) {
+                    this.setState({loggedIn: true});
+                }
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
 
     }
 
 }
 
 
-export
-default
-Register;
+export default Register;
