@@ -1,27 +1,50 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
-}
-.auth-box{
-  margin-top: 10%;
+    font-size: large;
 }
 
+.auth-box {
+    margin-top: 10%;
+}
+
+#add-bkt-btn {
+    margin-top: 1%;
+    margin-right: 5%;
+}
+#logout-btn {
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+.app-nav {
+    background-color: #12a5a5;
+}
+
+#app-title {
+    color: #ffffff;
+}
+
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
