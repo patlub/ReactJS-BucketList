@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
 import '../App.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import {Redirect} from 'react-router-dom';
 
-class NavBar extends Component {
+
+class Logout extends Component {
+    constructor(props) {
+        super(props);
+        localStorage.removeItem('token')
+    }
+
     render() {
-        return (
-            <div className="row app-nav">
-                <div className="col-md-9 pull-left">
-                    <h2 id="app-title">BucketList</h2>
-                </div>
-
-            </div>
-        );
+        return <Redirect to="/login"/>
     }
 }
-export default NavBar;
+export default Logout;
