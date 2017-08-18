@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import AddBucket from './add_bucket'
 import '../App.css';
 import NavBar from './navbar'
 import axiosInstance from './config';
@@ -16,8 +17,12 @@ class Buckets extends Component {
     render() {
         console.log(localStorage.getItem('token'));
         if (this.state.token) {
-            this.getBuckets();
-            return <h1>Buckets</h1>
+            return (
+                <div>
+                    <NavBar/>
+                    <AddBucket/>
+                </div>
+            );
         } else {
             return <Redirect to="/login"/>
         }
@@ -27,7 +32,7 @@ class Buckets extends Component {
         axiosInstance.get('/buckets')
             .then(function (response) {
                 console.log(response)
-            }.bind(this))
+            })
             .catch(function (error) {
                 console.log(error);
             });
