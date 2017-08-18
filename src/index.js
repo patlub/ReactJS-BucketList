@@ -14,9 +14,9 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 ReactDOM.render(<BrowserRouter>
         <div>
-            <Route path='/' component={Buckets}/>
-            <Route path='/login' component={Login}/>
-            <Route path='/register' component={Register}/>
+            <Route path='/' component={Buckets} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
             <Route path='/forgot_password' component={ForgotPassword}/>
             <Route path='/logout' component={Logout}/>
         </div>
