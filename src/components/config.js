@@ -2,8 +2,10 @@ import axios from 'axios'
 
 
 const axiosInstance = axios.create({
-    timeout: 10000,
+    // timeout: 10000,
     baseURL: 'https://patrickluboobi-bucket-list-api.herokuapp.com',
+    headers: {'Authorization': localStorage.getItem('token')}
+
 });
 
 export default axiosInstance
