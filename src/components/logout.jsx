@@ -10,7 +10,8 @@ class Logout extends Component {
     }
 
     render() {
-        return <Redirect to="/login"/>
+        return window.location = '/login';
+        // return <Redirect to="/login"/>
     }
 }
 export default Logout;
