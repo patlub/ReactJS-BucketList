@@ -33,6 +33,14 @@
 
 .app-nav {
     background-color: #12a5a5;
+    padding-left: 2%;
+}
+.nav-tab{
+    margin-top: 2%;
+    color: white;
+}
+.nav-tab a{
+    color: white!important;
 }
 
 #app-title {
