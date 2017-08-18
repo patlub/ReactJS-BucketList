@@ -3,7 +3,7 @@ import '../App.css';
 import {Link, Redirect} from 'react-router-dom';
 import axiosInstance from './config';
 
-class Login extends Component {
+class AddBucket extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,10 +12,6 @@ class Login extends Component {
     }
 
     render() {
-        if (this.state.loggedIn) {
-            return <Redirect to="/buckets"/>
-        }
-
         return (
             <div className="container-fluid text-center ">
                 <div className="col-md-4 col-md-offset-4 col-sm-9 auth-box">
@@ -24,7 +20,7 @@ class Login extends Component {
                             <h4 className="panel-title">Login</h4>
                         </div>
                         <div className="panel-body">
-                            <form onSubmit={this.onLoginHandler.bind(this)}>
+                            <form onSubmit={this.onAddBucketHandler.bind(this)}>
                                 <div className="modal-body">
                                     <div className="form-group">
                                         <input className="form-control" type="email"
@@ -55,7 +51,7 @@ class Login extends Component {
         );
     }
 
-    onLoginHandler(event) {
+    onAddBucketHandler(event) {
         event.preventDefault();
         const email = this.refs.login_email.value;
         const password = this.refs.login_password.value;
@@ -76,4 +72,4 @@ class Login extends Component {
             });
     }
 }
-export default Login;
+export default AddBucket;
