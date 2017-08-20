@@ -22,7 +22,7 @@ class AddBucket extends Component {
                             <h4 className="modal-title" id="myModalLabel">Add Bucket</h4>
                         </div>
                         <div className="modal-body">
-                            {AddBucket.render_form()}
+                            {this.render_add_bucket_form()}
                         </div>
                     </div>
                 </div>
@@ -30,9 +30,9 @@ class AddBucket extends Component {
         );
     }
 
-    static render_form() {
+    render_add_bucket_form() {
         return (
-            <form onSubmit="">
+            <form onSubmit={this.onAddBucketHandler.bind(this)}>
                 <div className="modal-body">
                     <div className="form-group">
                         <input
@@ -48,9 +48,9 @@ class AddBucket extends Component {
                             className="form-control"
                             type="text"
                             placeholder="Description"
-                            ref="desc"
+                            ref="bucket_desc"
                             required
-                        >Description</textarea>
+                        ></textarea>
                     </div>
 
                 </div>
@@ -66,19 +66,17 @@ class AddBucket extends Component {
 
     onAddBucketHandler(event) {
         event.preventDefault();
-        const email = this.refs.login_email.value;
-        const password = this.refs.login_password.value;
+        const bucket = this.refs.bucket_name.value;
+        const desc = this.refs.bucket_desc.value;
 
-        axiosInstance.post('/auth/login',
+        axiosInstance.post('/buckets',
             {
-                email,
-                password,
+                bucket,
+                desc
             })
             .then((response) => {
-                if (response.status === 201) {
-                    localStorage.setItem('token', response.data.id);
-                    this.setState({loggedIn: response.data.id});
-                }
+            console.log(response.data);
+                this.props.addBucket(response.data);
             })
             .catch((error) => {
                 console.log(error);
