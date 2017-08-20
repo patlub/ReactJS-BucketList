@@ -75,7 +75,6 @@ class AddBucket extends Component {
                 desc
             })
             .then((response) => {
-            console.log(response.data);
                 this.props.addBucket(response.data);
             })
             .catch((error) => {
