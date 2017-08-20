@@ -40,7 +40,6 @@ class Buckets extends Component {
                 _.forEach(response.data, function (value) {
                     bucketLists.push(value);
                 });
-                console.log(bucketLists);
                 this.setState({buckets: bucketLists});
             }.bind(this))
             .catch(function (error) {
