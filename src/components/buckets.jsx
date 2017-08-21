@@ -5,6 +5,8 @@ import '../App.css';
 import NavBar from './navbar'
 import axiosInstance from './config';
 import _ from 'lodash'
+import BucketList from './BucketList';
+import BucketTableHeader from './BucketTableHeader';
 
 const bucketLists = [];
 
@@ -23,9 +25,17 @@ class Buckets extends Component {
         }
         if (this.state.token) {
             return (
-                <div>
+                <div className="container-fluid">
                     <NavBar/>
                     <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
+                    <div className="col-sm-7">
+                        <table className="table table-responsive table-striped">
+                            <BucketTableHeader/>
+                            <tbody>
+                            {this.render_buckets()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             );
@@ -48,51 +58,19 @@ class Buckets extends Component {
     }
 
     addBucket(bucket) {
-        console.log(this.state.buckets);
         bucketLists.push(bucket);
         this.setState({bucket: bucketLists})
     }
 
-    render_buckets(buckets) {
-        return (
-            <div className="panel panel-primary">
-                <div className="panel-heading">
-                    <h4 className="panel-title">Login</h4>
-                </div>
-                <div className="panel-body">
-                    <form onSubmit={this.onLoginHandler.bind(this)}>
-                        <div className="modal-body">
-                            <div className="form-group">
-                                <input
-                                    className="form-control"
-                                    type="email"
-                                    placeholder="Email"
-                                    ref="login_email"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <input
-                                    className="form-control"
-                                    type="password"
-                                    placeholder="Password"
-                                    ref="login_password"
-                                    required
-                                />
-                            </div>
+    render_buckets() {
+        return _.map(bucketLists, (bucket, index) => <BucketList key={index}{...bucket}
+                                                                 getBuckets={this.getBuckets.bind(this)}
+                                                                 unSetBuckets={this.unSetBuckets.bind(this)}/>)
+    }
 
-                        </div>
-                        <div className="modal-footer">
-                            <div>
-                                <button type="submit" className="btn btn-primary btn-lg btn-block">Login
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        );
+    unSetBuckets() {
+        bucketLists.length = 0;
+        this.setState({buckets: bucketLists});
     }
 }
 
