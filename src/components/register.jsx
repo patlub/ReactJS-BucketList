@@ -13,7 +13,7 @@ class Register extends Component {
 
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/buckets"/>
+            return <Redirect to="/"/>
         }
 
         return (
