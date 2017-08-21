@@ -46,6 +46,9 @@
 #app-title {
     color: #ffffff;
 }
+.action-btn{
+    margin-right: 2%;
+}
 
 
 @keyframes App-logo-spin {
