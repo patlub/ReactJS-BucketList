@@ -24,7 +24,7 @@ class BucketList extends Component {
             <td>
                 <button onClick={this.onEditClick.bind(this)} className="btn btn-sm btn-primary action-btn">Edit
                 </button>
-                <button className="btn btn-sm btn-danger">Delete</button>
+                <button onClick={this.onDeleteClick.bind(this)} className="btn btn-sm btn-danger">Delete</button>
             </td>
         );
     }
@@ -47,6 +47,7 @@ class BucketList extends Component {
                 <td>{this.props.name}</td>
                 <td>{this.props.desc}</td>
                 <td>{this.props.date_added}</td>
+                <input type="hidden" value={this.props.id} ref="id"/>
                 {this.renderActions()}
             </tr>
         );
@@ -75,6 +76,21 @@ class BucketList extends Component {
                 bucket,
                 desc
             })
+            .then((response) => {
+                this.props.unSetBuckets();
+                this.setState({isEditing: false});
+                this.props.getBuckets();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    onDeleteClick(event) {
+        event.preventDefault();
+        const id = this.refs.id.value;
+
+        axiosInstance.delete('/buckets/' + id)
             .then((response) => {
                 this.props.unSetBuckets();
                 this.setState({isEditing: false});
