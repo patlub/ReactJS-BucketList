@@ -9,6 +9,7 @@ class BucketTableHeader extends Component {
                 <th>Bucket name</th>
                 <th>Description</th>
                 <th>Date Added</th>
+                <th>Action</th>
             </tr>
             </thead>
         );
