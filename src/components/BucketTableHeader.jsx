@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import '../App.css';
 
-class BucketListItem extends Component {
+class BucketTableHeader extends Component {
     render() {
         return (
+            <thead>
             <tr>
-                <td>{this.props.name}</td>
+                <th>Bucket name</th>
+                <th>Description</th>
+                <th>Date Added</th>
             </tr>
+            </thead>
         );
     }
+
 }
-export default BucketListItem;
+export default BucketTableHeader;
