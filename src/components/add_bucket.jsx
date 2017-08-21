@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import {Link, Redirect} from 'react-router-dom';
 import axiosInstance from './config';
 
 class AddBucket extends Component {
