@@ -20,10 +20,20 @@ class Buckets extends Component {
     }
 
     render() {
-        if (!this.state.buckets) {
-            this.getBuckets();
-        }
         if (this.state.token) {
+            if (!this.state.buckets) {
+                this.getBuckets();
+            }
+
+            if (bucketLists.length === 0) {
+                return (
+                    <div className="container-fluid">
+                        <NavBar/>
+                        <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
+                        <div className="col-sm-7">No bucket Lists</div>
+                    </div>
+                );
+            }
             return (
                 <div className="container-fluid">
                     <NavBar/>
@@ -37,7 +47,6 @@ class Buckets extends Component {
                         </table>
                     </div>
                 </div>
-
             );
         } else {
             return <Redirect to="/login"/>
@@ -47,10 +56,12 @@ class Buckets extends Component {
     getBuckets() {
         axiosInstance.get('/buckets')
             .then(function (response) {
-                _.forEach(response.data, function (value) {
-                    bucketLists.push(value);
-                });
-                this.setState({buckets: bucketLists});
+                if (response.status === 200) {
+                    _.forEach(response.data, function (value) {
+                        bucketLists.push(value);
+                    });
+                    this.setState({buckets: bucketLists});
+                }
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
@@ -58,7 +69,9 @@ class Buckets extends Component {
     }
 
     addBucket(bucket) {
-        bucketLists.push(bucket);
+        if (bucketLists.length !== 0) {
+            bucketLists.push(bucket);
+        }
         this.setState({bucket: bucketLists})
     }
 
