@@ -12,27 +12,7 @@ class AddBucket extends Component {
 
     render() {
         return (
-            <div className="modal fade" id="addBucketModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                            <h4 className="modal-title" id="myModalLabel">Add Bucket</h4>
-                        </div>
-                        <div className="modal-body">
-                            {this.render_add_bucket_form()}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    render_add_bucket_form() {
-        return (
-            <form onSubmit={this.onAddBucketHandler.bind(this)}>
-                <div className="modal-body">
+            <form className="form-inline" onSubmit={this.onAddBucketHandler.bind(this)}>
                     <div className="form-group">
                         <input
                             className="form-control"
@@ -43,22 +23,18 @@ class AddBucket extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <textarea
+                        <input
                             className="form-control"
                             type="text"
                             placeholder="Description"
                             ref="bucket_desc"
                             required
-                        ></textarea>
+                        />
                     </div>
-
-                </div>
-                <div className="modal-footer">
-                    <div>
-                        <button type="submit" className="btn btn-primary btn-lg btn-block">Add Bucket
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-primary">Add Bucket
                         </button>
                     </div>
-                </div>
             </form>
         );
     }
