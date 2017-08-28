@@ -7,6 +7,7 @@ import axiosInstance from './config';
 import _ from 'lodash'
 import BucketList from './BucketList';
 import BucketTableHeader from './BucketTableHeader';
+import ItemtableHeader from './ItemTableHeader';
 
 const bucketLists = [];
 
@@ -50,7 +51,7 @@ class Buckets extends Component {
                         <table className="table table-responsive table-striped">
                             <ItemtableHeader/>
                             <tbody>
-                                {this.render_items()}
+                                
                             </tbody>
                         </table>
                     </div>
