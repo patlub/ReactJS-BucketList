@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import '../App.css';
 import axiosInstance from './config';
+import _ from 'lodash';
+
+const bucketListItems = []
 
 class BucketList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false
+            isEditing: false,
+            items: false
         };
     }
 
@@ -44,7 +48,7 @@ class BucketList extends Component {
 
         return (
             <tr>
-                <td>{this.props.name}</td>
+                <td onClick={this.onViewItemClick.bind(this)}>{this.props.name}</td>
                 <td>{this.props.desc}</td>
                 <td>{this.props.date_added}</td>
                 <input type="hidden" value={this.props.id} ref="id"/>
@@ -99,6 +103,24 @@ class BucketList extends Component {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    onViewItemClick(event){
+        axiosInstance.get('/items/' + this.props.id)
+        .then(function (response) {
+            if (response.status === 200) {
+                _.forEach(response.data, function (value) {
+                    bucketListItems.push(value);
+                });
+                // console.log(bucketListItems);
+                this.setState({items: bucketListItems});
+            }
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+        console.log(this.props.id);
+        
     }
 }
 export default BucketList;
