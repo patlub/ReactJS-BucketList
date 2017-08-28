@@ -22,9 +22,9 @@ class Buckets extends Component {
     render() {
         if (this.state.token) {
             if (!this.state.buckets) {
-                this.getBuckets();
+                 this.getBuckets();
             }
-
+        
             if (bucketLists.length === 0) {
                 return (
                     <div className="container-fluid">
@@ -43,6 +43,14 @@ class Buckets extends Component {
                             <BucketTableHeader/>
                             <tbody>
                             {this.render_buckets()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="col-sm-5">
+                        <table className="table table-responsive table-striped">
+                            <ItemtableHeader/>
+                            <tbody>
+                                {this.render_items()}
                             </tbody>
                         </table>
                     </div>
