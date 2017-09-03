@@ -33,12 +33,11 @@ class ItemList extends Component {
     }
 
     render_items() {
-        console.log('final render');
         if (this.state.isEditing) {
             return (
                 <tr>
                     <td><input type="text" defaultValue={this.props.name} ref="editItemName"/></td>
-                    <td><input type="text" defaultValue={this.props.status} ref="editStatus"/></td>
+                    <td><input type="text" defaultValue={this.props.status} ref="editItemStatus"/></td>
                     <td>{this.props.date_added}</td>
                     <input type="hidden" value={this.props.id} ref="id"/>
                     {this.renderActions()}
@@ -57,9 +56,8 @@ class ItemList extends Component {
     }
 
     render() {
-        console.log('this is render')
         return this.render_items();
-            
+
     }
 
     onEditClick() {
@@ -72,19 +70,20 @@ class ItemList extends Component {
 
     onSaveClick(event) {
         event.preventDefault();
-        const bucket = this.refs.editBucketName.value;
-        const desc = this.refs.editDesc.value;
+        const bucketListItems = [];
+        const item = this.refs.editItemName.value;
+        const status = this.refs.editItemStatus.value;
         const id = this.refs.id.value;
+        const bucket_id = this.props.bucket_id;
 
-        axiosInstance.put('/buckets/' + id,
+        axiosInstance.put('/buckets/' + bucket_id + '/items/' + id,
             {
-                bucket,
-                desc
+                item,
+                status
             })
             .then((response) => {
-                this.props.unSetBuckets();
                 this.setState({isEditing: false});
-                this.props.getBuckets();
+                this.props.updateItems(response.data, id);
             })
             .catch((error) => {
                 console.log(error);
