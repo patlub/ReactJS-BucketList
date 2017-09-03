@@ -6,7 +6,8 @@ class ItemTableHeader extends Component {
         return (
             <thead>
             <tr>
-                <th>Bucket name</th>
+                <th>Item</th>
+                <th>Status</th>
                 <th>Date Added</th>
                 <th>Action</th>
             </tr>
