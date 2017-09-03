@@ -1,16 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../App.css';
 import axiosInstance from './config';
 import _ from 'lodash';
-
-const bucketListItems = []
 
 class BucketList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false,
-            items: false
+            isEditing: false
         };
     }
 
@@ -37,10 +34,10 @@ class BucketList extends Component {
         if (this.state.isEditing) {
             return (
                 <tr>
-                    <td><input type="text" defaultValue={this.props.name} ref="editBucketName"/></td>
-                    <td><input type="text" defaultValue={this.props.desc} ref="editDesc"/></td>
+                    <td><input type="text" defaultValue={this.props.name} ref="editBucketName" /></td>
+                    <td><input type="text" defaultValue={this.props.desc} ref="editDesc" /></td>
                     <td>{this.props.date_added}</td>
-                    <input type="hidden" value={this.props.id} ref="id"/>
+                    <input type="hidden" value={this.props.id} ref="id" />
                     {this.renderActions()}
                 </tr>
             );
@@ -51,7 +48,7 @@ class BucketList extends Component {
                 <td onClick={this.onViewItemClick.bind(this)}>{this.props.name}</td>
                 <td>{this.props.desc}</td>
                 <td>{this.props.date_added}</td>
-                <input type="hidden" value={this.props.id} ref="id"/>
+                <input type="hidden" value={this.props.id} ref="id" />
                 {this.renderActions()}
             </tr>
         );
@@ -62,11 +59,11 @@ class BucketList extends Component {
     }
 
     onEditClick() {
-        this.setState({isEditing: true})
+        this.setState({ isEditing: true })
     }
 
     onCancelClick() {
-        this.setState({isEditing: false})
+        this.setState({ isEditing: false })
     }
 
     onSaveClick(event) {
@@ -82,7 +79,7 @@ class BucketList extends Component {
             })
             .then((response) => {
                 this.props.unSetBuckets();
-                this.setState({isEditing: false});
+                this.setState({ isEditing: false });
                 this.props.getBuckets();
             })
             .catch((error) => {
@@ -97,7 +94,7 @@ class BucketList extends Component {
         axiosInstance.delete('/buckets/' + id)
             .then((response) => {
                 this.props.unSetBuckets();
-                this.setState({isEditing: false});
+                this.setState({ isEditing: false });
                 this.props.getBuckets();
             })
             .catch((error) => {
@@ -105,22 +102,22 @@ class BucketList extends Component {
             });
     }
 
-    onViewItemClick(event){
+    onViewItemClick(event) {
+        const bucketListItems = [];
         axiosInstance.get('/items/' + this.props.id)
-        .then(function (response) {
-            if (response.status === 200) {
-                _.forEach(response.data, function (value) {
-                    bucketListItems.push(value);
-                });
-                // console.log(bucketListItems);
-                this.setState({items: bucketListItems});
-            }
-        }.bind(this))
-        .catch(function (error) {
-            console.log(error);
-        });
-        console.log(this.props.id);
-        
+            .then(function (response) {
+                if (response.status === 200) {
+                    _.forEach(response.data, function (value) {
+                        bucketListItems.push(value);
+                    });
+                    this.props.getItems(bucketListItems, this.props.id);
+                }
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+
     }
+
 }
 export default BucketList;
