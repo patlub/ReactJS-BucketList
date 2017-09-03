@@ -1,66 +1,95 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
-import AddBucket from './add_bucket'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import AddBucket from './add_bucket';
+import AddItem from './add_item';
 import '../App.css';
-import NavBar from './navbar'
+import NavBar from './navbar';
 import axiosInstance from './config';
-import _ from 'lodash'
+import _ from 'lodash';
 import BucketList from './BucketList';
+import ItemList from './itemList';
 import BucketTableHeader from './BucketTableHeader';
 import ItemtableHeader from './ItemTableHeader';
 
 const bucketLists = [];
+let items = [];
 
 class Buckets extends Component {
     constructor(props) {
         super(props);
         this.state = {
             token: localStorage.getItem('token'),
-            buckets: false
+            buckets: false,
+            items: null,
+            bucket_id: null
         };
     }
 
     render() {
         if (this.state.token) {
             if (!this.state.buckets) {
-                 this.getBuckets();
+                this.getBuckets();
             }
-        
+
             if (bucketLists.length === 0) {
                 return (
                     <div className="container-fluid">
-                        <NavBar/>
-                        <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
+                        <NavBar />
+                        <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)} />
                         <div className="col-sm-7">No bucket Lists</div>
                     </div>
                 );
             }
-            return (
-                <div className="container-fluid">
-                    <NavBar/>
-                    <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
-                    <div className="col-sm-7">
-                        <table className="table table-responsive table-striped">
-                            <BucketTableHeader/>
-                            <tbody>
-                            {this.render_buckets()}
-                            </tbody>
-                        </table>
+            if (this.state.items !== null) {
+                // Buckets page has just loaded
+                return (
+                    <div className="container-fluid">
+                        <NavBar />
+                        {this.bucketSection()}
+                        {this.itemSection()}
                     </div>
-                    <div className="col-sm-5">
-                        <table className="table table-responsive table-striped">
-                            <ItemtableHeader/>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                    </div>
+                );
+            }else{
+                return(
+                    <div className="container-fluid">
+                    <NavBar />
+                    {this.bucketSection()}
                 </div>
-            );
+                );
+            }
         } else {
-            return <Redirect to="/login"/>
+            return <Redirect to="/login" />
         }
     }
+
+    bucketSection() {
+        return (
+            <div className="col-sm-7">
+                <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)} />
+                <table className="table table-responsive table-striped">
+                    <BucketTableHeader />
+                    <tbody>
+                        {this.renderBuckets()}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+    itemSection() {
+        return (
+            <div className="col-sm-5">
+                <AddItem items={this.state.items} bucket_id={this.state.bucket_id} addItem={this.addItem.bind(this)} />
+                <table className="table table-responsive table-striped">
+                    <ItemtableHeader />
+                    <tbody>
+                        {this.renderItems()}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
 
     getBuckets() {
         axiosInstance.get('/buckets')
@@ -69,7 +98,7 @@ class Buckets extends Component {
                     _.forEach(response.data, function (value) {
                         bucketLists.push(value);
                     });
-                    this.setState({buckets: bucketLists});
+                    this.setState({ buckets: bucketLists });
                 }
             }.bind(this))
             .catch(function (error) {
@@ -81,18 +110,38 @@ class Buckets extends Component {
         if (bucketLists.length !== 0) {
             bucketLists.push(bucket);
         }
-        this.setState({bucket: bucketLists})
+        this.setState({ bucket: bucketLists })
     }
 
-    render_buckets() {
-        return _.map(bucketLists, (bucket, index) => <BucketList key={index}{...bucket}
-                                                                 getBuckets={this.getBuckets.bind(this)}
-                                                                 unSetBuckets={this.unSetBuckets.bind(this)}/>)
+    addItem(item) {
+        if (items.length !== 0) {
+            items.push(item);
+        }
+        this.setState({ items: items })
+    }
+
+    getItems(fetched_items, bucket_id) {
+        items = fetched_items.slice();
+        this.setState({
+            items: items,
+            bucket_id: bucket_id
+        })
+    }
+
+    renderBuckets() {
+        return _.map(this.state.buckets, (bucket, index) => <BucketList key={index}{...bucket}
+            getBuckets={this.getBuckets.bind(this)}
+            unSetBuckets={this.unSetBuckets.bind(this)}
+            getItems={this.getItems.bind(this)} />)
+    }
+
+    renderItems() {
+        return _.map(this.state.items, (item, index) => <ItemList key={index}{...item} />)
     }
 
     unSetBuckets() {
         bucketLists.length = 0;
-        this.setState({buckets: bucketLists});
+        this.setState({ buckets: bucketLists });
     }
 }
 
