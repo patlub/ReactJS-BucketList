@@ -49,12 +49,12 @@ class Buckets extends Component {
                         {this.itemSection()}
                     </div>
                 );
-            }else{
-                return(
+            } else {
+                return (
                     <div className="container-fluid">
-                    <NavBar />
-                    {this.bucketSection()}
-                </div>
+                        <NavBar />
+                        {this.bucketSection()}
+                    </div>
                 );
             }
         } else {
@@ -128,6 +128,16 @@ class Buckets extends Component {
         })
     }
 
+    updateItems(item, id){
+        var index = _.findIndex(items, function(o){
+            return o.id == id
+        })
+        console.log(items[index]);
+        items[index] = item;
+        console.log(items[index]);
+        this.setState({items:items})
+    }
+
     renderBuckets() {
         return _.map(this.state.buckets, (bucket, index) => <BucketList key={index}{...bucket}
             getBuckets={this.getBuckets.bind(this)}
@@ -136,7 +146,8 @@ class Buckets extends Component {
     }
 
     renderItems() {
-        return _.map(this.state.items, (item, index) => <ItemList key={index}{...item} />)
+        return _.map(this.state.items, (item, index) => <ItemList key={index}{...item}
+            updateItems={this.updateItems.bind(this)} />)
     }
 
     unSetBuckets() {
