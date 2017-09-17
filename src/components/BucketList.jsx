@@ -75,9 +75,8 @@ class BucketList extends Component {
                 desc
             })
             .then((response) => {
-                this.props.unSetBuckets();
                 this.setState({isEditing: false});
-                this.props.getBuckets();
+                this.props.updateBuckets(this.props.id, bucket, desc);
             })
             .catch((error) => {
                 console.log(error);
@@ -88,9 +87,8 @@ class BucketList extends Component {
         event.preventDefault();
         axiosInstance.delete(`/buckets/${this.props.id}`)
             .then((response) => {
-                this.props.unSetBuckets();
                 this.setState({isEditing: false});
-                this.props.getBuckets();
+                this.props.deleteBucket(this.props.id);
             })
             .catch((error) => {
                 console.log(error);
