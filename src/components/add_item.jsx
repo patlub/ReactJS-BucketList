@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
+
+// styles
 import '../App.css';
+
+// helpers
 import axiosInstance from './config';
 
 class AddItem extends Component {
@@ -7,43 +11,48 @@ class AddItem extends Component {
         super(props);
         this.state = {
             loggedIn: localStorage.getItem('token'),
+            item: '',
         };
+
+        this.handleInput = this.handleInput.bind(this);
     }
 
     render() {
         return (
-            <form className="form-inline" onSubmit={this.onAddItemHandler.bind(this)}>
-                    <div className="form-group">
-                        <input
-                            className="form-control"
-                            type="text"
-                            placeholder="item name"
-                            ref="item_name"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary">Add Item
-                        </button>
-                    </div>
+            <form className="form-inline" onSubmit={this.handleInput}>
+                <div className="form-group">
+                    <input
+                        className="form-control"
+                        type="text"
+                        placeholder="item name"
+                        ref="itemName"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <button type="submit" className="btn btn-primary">Add Item
+                    </button>
+                </div>
             </form>
         );
     }
 
-    onAddItemHandler(event) {
+    handleInput(event) {
         event.preventDefault();
-        const item = this.refs.item_name.value;
+        this.setState({item: this.refs.itemName.value}, () => {
+            axiosInstance.post(`/buckets/${this.props.bucket_id}/items`,
+                {
+                    item: this.state.item,
+                })
+                .then((response) => {
+                    this.props.addItem(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
 
-        axiosInstance.post('/buckets/' + this.props.bucket_id + '/items',
-            {
-                item
-            })
-            .then((response) => {
-                this.props.addItem(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 }
+
 export default AddItem;
