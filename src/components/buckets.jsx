@@ -21,7 +21,7 @@ class Buckets extends Component {
             token: localStorage.getItem('token'),
             buckets: false,
             items: null,
-            bucket_id: null
+            bucketId: null
         };
     }
 
@@ -79,7 +79,7 @@ class Buckets extends Component {
     itemSection() {
         return (
             <div className="col-md-5 col-sm-12 col-xs-12">
-                <AddItem items={this.state.items} bucket_id={this.state.bucket_id} addItem={this.addItem.bind(this)}/>
+                <AddItem items={this.state.items} bucket_id={this.state.bucketId} addItem={this.addItem.bind(this)}/>
                 <table className="table table-responsive table-striped">
                     <ItemtableHeader/>
                     <tbody>
@@ -89,7 +89,6 @@ class Buckets extends Component {
             </div>
         );
     }
-
 
     getBuckets() {
         axiosInstance.get('/buckets')
@@ -107,25 +106,37 @@ class Buckets extends Component {
     }
 
     addBucket(bucket) {
-        if (bucketLists.length !== 0) {
-            bucketLists.push(bucket);
-        }
+        bucketLists.push(bucket);
         this.setState({buckets: bucketLists})
     }
 
-    addItem(item) {
-        if (items.length !== 0) {
-            items.push(item);
-        }
-        this.setState({items: items})
+    updateBuckets(id, name, desc) {
+        let index = _.findIndex(bucketLists, function (o) {
+            return o.id === id
+        });
+        bucketLists[index].name = name;
+        bucketLists[index].desc = desc;
+        this.setState({buckets: bucketLists});
     }
 
-    getItems(fetched_items, bucket_id) {
-        items = fetched_items.slice();
+    deleteBucket(bucketId) {
+        _.remove(bucketLists, function (o) {
+            return o.id === bucketId
+        });
+        this.setState({buckets: bucketLists})
+    }
+
+    getItems(fetchedItems, bucketId) {
+        items = fetchedItems.slice();
         this.setState({
-            items: items,
-            bucket_id: bucket_id
+            items,
+            bucketId: bucketId
         })
+    }
+
+    addItem(item) {
+        items.push(item);
+        this.setState({items})
     }
 
     updateItems(item, id) {
@@ -133,25 +144,29 @@ class Buckets extends Component {
             return o.id === id
         });
         items[index] = item;
-        this.setState({items: items})
+        this.setState({items})
+    }
+
+    deleteItem(itemId) {
+        _.remove(items, function (o) {
+            return o.id === itemId
+        });
+        this.setState({items})
     }
 
     renderBuckets() {
         return _.map(this.state.buckets, (bucket, index) => <BucketList key={index}{...bucket}
-                                                                        getBuckets={this.getBuckets.bind(this)}
-                                                                        unSetBuckets={this.unSetBuckets.bind(this)}
+                                                                        deleteBucket={this.deleteBucket.bind(this)}
+                                                                        updateBuckets={this.updateBuckets.bind(this)}
                                                                         getItems={this.getItems.bind(this)}/>)
     }
 
     renderItems() {
         return _.map(this.state.items, (item, index) => <ItemList key={index}{...item}
-                                                                  updateItems={this.updateItems.bind(this)}/>)
+                                                                  updateItems={this.updateItems.bind(this)}
+                                                                  deleteItem={this.deleteItem.bind(this)}/>)
     }
 
-    unSetBuckets() {
-        bucketLists.length = 0;
-        this.setState({buckets: bucketLists});
-    }
 }
 
 
