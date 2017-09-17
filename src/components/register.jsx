@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom';
+
+// styles
 import '../App.css';
+
+// helpers
 import axiosInstance from './config';
 
 class Register extends Component {
@@ -13,7 +17,7 @@ class Register extends Component {
 
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/"/>
+            return <Redirect to="/" />
         }
 
         return (
@@ -27,8 +31,13 @@ class Register extends Component {
                             <form onSubmit={this.onRegisterClick.bind(this)}>
                                 <div className="modal-body">
                                     <div className="form-group">
-                                        <input className="form-control" type="text"
-                                               placeholder="Name" ref="reg_name" required/>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Name"
+                                            ref="reg_name"
+                                            required
+                                        />
                                     </div>
                                     <div className="form-group">
                                         <input className="form-control" type="email" placeholder="Email"
@@ -59,6 +68,10 @@ class Register extends Component {
         );
     }
 
+    /**
+     * This method handles user registration
+     * @param {event} event event triggering register action.
+     */
     onRegisterClick(event) {
         event.preventDefault();
         const name = this.refs.reg_name.value;
