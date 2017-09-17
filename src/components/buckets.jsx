@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import AddBucket from './add_bucket';
 import AddItem from './add_item';
 import '../App.css';
@@ -34,8 +34,8 @@ class Buckets extends Component {
             if (bucketLists.length === 0) {
                 return (
                     <div className="container-fluid">
-                        <NavBar />
-                        <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)} />
+                        <NavBar/>
+                        <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
                         <div className="col-sm-7">No bucket Lists</div>
                     </div>
                 );
@@ -44,7 +44,7 @@ class Buckets extends Component {
                 // Buckets page has just loaded
                 return (
                     <div className="container-fluid">
-                        <NavBar />
+                        <NavBar/>
                         {this.bucketSection()}
                         {this.itemSection()}
                     </div>
@@ -52,24 +52,24 @@ class Buckets extends Component {
             } else {
                 return (
                     <div className="container-fluid">
-                        <NavBar />
+                        <NavBar/>
                         {this.bucketSection()}
                     </div>
                 );
             }
         } else {
-            return <Redirect to="/login" />
+            return <Redirect to="/login"/>
         }
     }
 
     bucketSection() {
         return (
-            <div className="col-sm-7">
-                <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)} />
+            <div className="col-md-7 col-sm-12 col-xs-12">
+                <AddBucket buckets={this.state.buckets} addBucket={this.addBucket.bind(this)}/>
                 <table className="table table-responsive table-striped">
-                    <BucketTableHeader />
+                    <BucketTableHeader/>
                     <tbody>
-                        {this.renderBuckets()}
+                    {this.renderBuckets()}
                     </tbody>
                 </table>
             </div>
@@ -78,12 +78,12 @@ class Buckets extends Component {
 
     itemSection() {
         return (
-            <div className="col-sm-5">
-                <AddItem items={this.state.items} bucket_id={this.state.bucket_id} addItem={this.addItem.bind(this)} />
+            <div className="col-md-5 col-sm-12 col-xs-12">
+                <AddItem items={this.state.items} bucket_id={this.state.bucket_id} addItem={this.addItem.bind(this)}/>
                 <table className="table table-responsive table-striped">
-                    <ItemtableHeader />
+                    <ItemtableHeader/>
                     <tbody>
-                        {this.renderItems()}
+                    {this.renderItems()}
                     </tbody>
                 </table>
             </div>
@@ -98,7 +98,7 @@ class Buckets extends Component {
                     _.forEach(response.data, function (value) {
                         bucketLists.push(value);
                     });
-                    this.setState({ buckets: bucketLists });
+                    this.setState({buckets: bucketLists});
                 }
             }.bind(this))
             .catch(function (error) {
@@ -110,14 +110,14 @@ class Buckets extends Component {
         if (bucketLists.length !== 0) {
             bucketLists.push(bucket);
         }
-        this.setState({ bucket: bucketLists })
+        this.setState({buckets: bucketLists})
     }
 
     addItem(item) {
         if (items.length !== 0) {
             items.push(item);
         }
-        this.setState({ items: items })
+        this.setState({items: items})
     }
 
     getItems(fetched_items, bucket_id) {
@@ -128,31 +128,29 @@ class Buckets extends Component {
         })
     }
 
-    updateItems(item, id){
-        var index = _.findIndex(items, function(o){
-            return o.id == id
-        })
-        console.log(items[index]);
+    updateItems(item, id) {
+        let index = _.findIndex(items, function (o) {
+            return o.id === id
+        });
         items[index] = item;
-        console.log(items[index]);
-        this.setState({items:items})
+        this.setState({items: items})
     }
 
     renderBuckets() {
         return _.map(this.state.buckets, (bucket, index) => <BucketList key={index}{...bucket}
-            getBuckets={this.getBuckets.bind(this)}
-            unSetBuckets={this.unSetBuckets.bind(this)}
-            getItems={this.getItems.bind(this)} />)
+                                                                        getBuckets={this.getBuckets.bind(this)}
+                                                                        unSetBuckets={this.unSetBuckets.bind(this)}
+                                                                        getItems={this.getItems.bind(this)}/>)
     }
 
     renderItems() {
         return _.map(this.state.items, (item, index) => <ItemList key={index}{...item}
-            updateItems={this.updateItems.bind(this)} />)
+                                                                  updateItems={this.updateItems.bind(this)}/>)
     }
 
     unSetBuckets() {
         bucketLists.length = 0;
-        this.setState({ buckets: bucketLists });
+        this.setState({buckets: bucketLists});
     }
 }
 
