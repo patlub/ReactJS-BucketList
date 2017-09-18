@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
 import './index.css';
-import Login from './components/login';
-import Logout from './components/logout';
-import Register from './components/register';
-import ForgotPassword from './components/forgot_password';
-import Buckets from './components/buckets';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
+import Buckets from './components/Buckets';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<BrowserRouter>
