@@ -30,7 +30,7 @@ class Register extends Component {
 
     /**
      * This method handles user registration
-     * @param {event} event event triggering register action.
+     * @param {event} event when triggering register action.
      */
     onRegisterClick = (event) => {
         console.log(this.state);
