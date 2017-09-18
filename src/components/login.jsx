@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
+
+// Styles
 import '../App.css';
+
+// configs
 import axiosInstance from './config';
+
 
 class Login extends Component {
     constructor(props) {
