@@ -19,12 +19,20 @@ class Login extends Component {
 
     }
 
+    /*
+    * Fired when input changes
+    * @param (event) event when input changes
+    * */
     onInputChanged = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     };
 
+    /**
+     * This method handles user login
+     * @param {event} event event triggering login action.
+     */
     onLoginHandler = (event) => {
         event.preventDefault();
         axiosInstance.post(`/auth/login`,
