@@ -14,18 +14,48 @@ class AddItem extends Component {
             item: '',
         };
 
-        this.handleInput = this.handleInput.bind(this);
     }
+
+    /*
+    * Fired when input changes
+    * @param (event) event when input changes
+    * */
+    onInputChanged = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    /**
+     * This method handles adding an item
+     * @param {event} event when triggering addItem action.
+     */
+    addItem = (event) => {
+        event.preventDefault();
+        axiosInstance.post(`/buckets/${this.props.bucket_id}/items`,
+            {
+                item: this.state.item,
+            })
+            .then((response) => {
+                this.props.addItem(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
 
     render() {
         return (
-            <form className="form-inline" onSubmit={this.handleInput}>
+            <form className="form-inline" onSubmit={this.addItem}>
                 <div className="form-group">
                     <input
                         className="form-control"
                         type="text"
+                        name="item"
+                        value={this.state.item}
                         placeholder="item name"
-                        ref="itemName"
+                        onChange={this.onInputChanged}
                         required
                     />
                 </div>
@@ -35,23 +65,6 @@ class AddItem extends Component {
                 </div>
             </form>
         );
-    }
-
-    handleInput(event) {
-        event.preventDefault();
-        this.setState({item: this.refs.itemName.value}, () => {
-            axiosInstance.post(`/buckets/${this.props.bucket_id}/items`,
-                {
-                    item: this.state.item,
-                })
-                .then((response) => {
-                    this.props.addItem(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        });
-
     }
 }
 
