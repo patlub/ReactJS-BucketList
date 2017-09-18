@@ -8,12 +8,40 @@ class Login extends Component {
         super(props);
         this.state = {
             loggedIn: localStorage.getItem('token'),
+            email: '',
+            password: '',
         };
+
     }
+
+    onInputChanged = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    onLoginHandler = (event) => {
+        event.preventDefault();
+        axiosInstance.post(`/auth/login`,
+            {
+                email: this.state.email,
+                password: this.state.password
+            })
+            .then((response) => {
+                if (response.status === 201) {
+                    localStorage.setItem('token', response.data.id);
+                    this.setState({loggedIn: response.data.id});
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
 
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/"/>;
+            return <Redirect to="/"/>
         }
         else {
             return (
@@ -24,15 +52,17 @@ class Login extends Component {
                                 <h4 className="panel-title">Login</h4>
                             </div>
                             <div className="panel-body">
-                                <form onSubmit={this.onLoginHandler.bind(this)}>
+                                <form onSubmit={this.onLoginHandler}>
                                     <div className="modal-body">
                                         <div className="form-group">
                                             <input
                                                 className="form-control"
                                                 type="email"
                                                 placeholder="Email"
-                                                ref="login_email"
                                                 required
+                                                name="email"
+                                                value={this.state.email}
+                                                onChange={this.onInputChanged}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -40,7 +70,9 @@ class Login extends Component {
                                                 className="form-control"
                                                 type="password"
                                                 placeholder="Password"
-                                                ref="login_password"
+                                                name="password"
+                                                value={this.state.password}
+                                                onChange={this.onInputChanged}
                                                 required
                                             />
                                         </div>
@@ -48,7 +80,9 @@ class Login extends Component {
                                     </div>
                                     <div className="modal-footer">
                                         <div>
-                                            <button type="submit" className="btn btn-primary btn-lg btn-block">Login
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary btn-lg btn-block">Login
                                             </button>
                                         </div>
                                         <div>
@@ -65,26 +99,6 @@ class Login extends Component {
             );
         }
     }
-
-    onLoginHandler(event) {
-        event.preventDefault();
-        const email = this.refs.login_email.value;
-        const password = this.refs.login_password.value;
-
-        axiosInstance.post('/auth/login',
-            {
-                email,
-                password
-            })
-            .then((response) => {
-                if (response.status === 201) {
-                    localStorage.setItem('token', response.data.id);
-                    this.setState({loggedIn: response.data.id});
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
 }
+
 export default Login;
