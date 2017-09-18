@@ -11,13 +11,50 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: localStorage.getItem('token')
+            loggedIn: localStorage.getItem('token'),
+            name: '',
+            email: '',
+            password: '',
         };
     }
 
+    /*
+    * Fired when input changes
+    * @param (event) event when input changes
+    * */
+    onInputChanged = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    /**
+     * This method handles user registration
+     * @param {event} event event triggering register action.
+     */
+    onRegisterClick = (event) => {
+        console.log(this.state);
+        event.preventDefault();
+        axiosInstance.post(`/auth/register`,
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password
+            })
+            .then(function (response) {
+                if (response.status === 201) {
+                    localStorage.setItem('token', response.data.id);
+                    this.setState({loggedIn: response.data.id});
+                }
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/" />
+            return <Redirect to="/"/>
         }
 
         return (
@@ -28,26 +65,38 @@ class Register extends Component {
                             <h4 className="panel-title">Sign up</h4>
                         </div>
                         <div className="panel-body">
-                            <form onSubmit={this.onRegisterClick.bind(this)}>
+                            <form onSubmit={this.onRegisterClick}>
                                 <div className="modal-body">
                                     <div className="form-group">
                                         <input
                                             className="form-control"
                                             type="text"
+                                            name="name"
+                                            value={this.state.name}
+                                            onChange={this.onInputChanged}
                                             placeholder="Name"
-                                            ref="reg_name"
                                             required
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <input className="form-control" type="email" placeholder="Email"
-                                               ref="reg_email"
-                                               required/>
+                                        <input
+                                            className="form-control"
+                                            type="email"
+                                            name="email"
+                                            value={this.state.email}
+                                            onChange={this.onInputChanged}
+                                            placeholder="Email"
+                                            required/>
                                     </div>
                                     <div className="form-group">
-                                        <input className="form-control" type="password" placeholder="Password"
-                                               ref="reg_password"
-                                               required/>
+                                        <input
+                                            className="form-control"
+                                            type="password"
+                                            name="password"
+                                            value={this.state.password}
+                                            onChange={this.onInputChanged}
+                                            placeholder="Password"
+                                            required/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
@@ -66,33 +115,6 @@ class Register extends Component {
                 </div>
             </div>
         );
-    }
-
-    /**
-     * This method handles user registration
-     * @param {event} event event triggering register action.
-     */
-    onRegisterClick(event) {
-        event.preventDefault();
-        const name = this.refs.reg_name.value;
-        const email = this.refs.reg_email.value;
-        const password = this.refs.reg_password.value;
-
-        axiosInstance.post('/auth/register',
-            {
-                name: name,
-                email: email,
-                password: password
-            })
-            .then(function (response) {
-                if (response.status === 201) {
-                    localStorage.setItem('token', response.data.id);
-                    this.setState({loggedIn: response.data.id});
-                }
-            }.bind(this))
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 }
 
