@@ -14,76 +14,10 @@ class ItemList extends Component {
     }
 
     onInputChanged = (event) => {
+        console.log(this.state.status);
         this.setState({
             [event.target.name]: event.target.value
         })
-    };
-
-    // Edit, Delete, actions section
-    renderActions = () => {
-        if (this.state.isEditing) {
-            return (
-                <td>
-                    <span onClick={this.onSaveClick} className="glyphicon glyphicon-floppy-disk save"></span>
-                    <span onClick={this.onCancelClick} className="glyphicon glyphicon-ban-circle cancel"></span>
-                </td>
-            );
-        }
-        return (
-            <td>
-                <span onClick={this.onEditClick} className="glyphicon glyphicon-pencil edit"></span>
-                <span onClick={this.onCancelClick} className="glyphicon glyphicon-trash remove"></span>
-            </td>
-        );
-    };
-
-    // Displays items table row depending on isEditing state
-    render_items = () => {
-        if (this.state.isEditing) {
-            return (
-                <tr>
-                    <td>
-                        <input
-                            type="text"
-                            name="name"
-                            defaultValue={this.state.name}
-                            value={this.state.name}
-                            onChange={this.onInputChanged}/>
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            name="status"
-                            defaultValue={this.state.status}
-                            value={this.state.status}
-                            onChange={this.onInputChanged}/>
-                    </td>
-                    <td>{this.props.date_added}</td>
-                    {this.renderActions()}
-                </tr>
-            );
-        }
-        return (
-            <tr>
-                <td>{this.state.name}</td>
-                <td>{this.state.status}</td>
-                <td>{this.props.date_added}</td>
-                {this.renderActions()}
-            </tr>
-        );
-    };
-
-    render() {
-        return this.render_items();
-
-    }
-
-    onEditClick = () => {
-        this.setState({isEditing: true})
-    };
-
-    onCancelClick = () => {
-        this.setState({isEditing: false})
     };
 
     /*
@@ -107,6 +41,33 @@ class ItemList extends Component {
     };
 
     /*
+    * Changes bucket status
+    * @param {event} event fired when changing bucket status
+    * */
+    changeStatus = (event) => {
+        event.preventDefault();
+        let newStatus = "false";
+        if (this.state.status === "false") {
+            newStatus = "true"
+        }
+        this.setState({status: newStatus}, () => {
+            axiosInstance.put(`/buckets/${this.props.bucket_id}/items/${this.props.id}`,
+                {
+                    item: this.state.name,
+                    status: this.state.status,
+                })
+                .then((response) => {
+                    this.setState({isEditing: false});
+                    this.props.updateItems(response.data, this.props.id);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        })
+    };
+
+    /*
     * Deletes a bucket
     * @param {event} event fired when deleting a bucket
     * */
@@ -120,6 +81,84 @@ class ItemList extends Component {
             .catch((error) => {
                 console.log(error);
             });
+    };
+
+    onEditClick = () => {
+        this.setState({isEditing: true})
+    };
+
+    onCancelClick = () => {
+        this.setState({isEditing: false})
+    };
+
+    // Edit, Delete, actions section
+    renderActions = () => {
+        if (this.state.isEditing) {
+            return (
+                <td>
+                    <span onClick={this.onSaveClick} className="glyphicon glyphicon-floppy-disk save"></span>
+                    <span onClick={this.onCancelClick} className="glyphicon glyphicon-ban-circle cancel"></span>
+                </td>
+            );
+        }
+        return (
+            <td>
+                <span onClick={this.onEditClick} className="glyphicon glyphicon-pencil edit"></span>
+                <span onClick={this.onDeleteClick} className="glyphicon glyphicon-trash remove"></span>
+            </td>
+        );
+    };
+
+    // Displays items table row depending on isEditing state
+    render_items = () => {
+        console.log(this.state.status);
+        if (this.state.isEditing) {
+            return this.editItemSection();
+        }
+        if (this.state.status === "true") {
+            return this.sectionForItemStatusTrue();
+        }
+        return this.sectionForItemStatusFalse();
+    };
+
+    editItemSection = () => (
+        <tr>
+            <td>
+                <input
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onInputChanged}/>
+            </td>
+            <td>{this.props.date_added}</td>
+            {this.renderActions()}
+        </tr>
+    );
+
+    sectionForItemStatusTrue = () => (
+        <tr>
+            <td onClick={this.changeStatus}>
+                {this.state.name}
+            </td>
+            <td><span className="glyphicon glyphicon-ok done"></span></td>
+            <td>{this.props.date_added}</td>
+            {this.renderActions()}
+        </tr>
+    );
+
+    sectionForItemStatusFalse = () => (
+        <tr>
+            <td onClick={this.changeStatus}>
+                {this.state.name}
+            </td>
+            <td></td>
+            <td>{this.props.date_added}</td>
+            {this.renderActions()}
+        </tr>
+    );
+
+    render() {
+        return this.render_items();
     }
 
 }
