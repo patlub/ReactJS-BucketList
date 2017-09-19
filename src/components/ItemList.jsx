@@ -67,7 +67,7 @@ class ItemList extends Component {
             <tr>
                 <td>{this.state.name}</td>
                 <td>{this.state.status}</td>
-                <td>{this.state.date_added}</td>
+                <td>{this.props.date_added}</td>
                 {this.renderActions()}
             </tr>
         );
