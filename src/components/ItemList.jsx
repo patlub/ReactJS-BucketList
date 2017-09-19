@@ -7,35 +7,57 @@ class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false
+            isEditing: false,
+            name: this.props.name,
+            status: this.props.status,
         };
     }
 
-    renderActions() {
+    onInputChanged = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    renderActions = () => {
         if (this.state.isEditing) {
             return (
                 <td>
-                    <button onClick={this.onSaveClick.bind(this)} className="btn btn-sm btn-success action-btn">Save
+                    <button onClick={this.onSaveClick} className="btn btn-sm btn-success action-btn">Save
                     </button>
-                    <button onClick={this.onCancelClick.bind(this)} className="btn btn-sm btn-default">Cancel</button>
+                    <button onClick={this.onCancelClick} className="btn btn-sm btn-default">Cancel</button>
                 </td>
             );
         }
         return (
             <td>
-                <button onClick={this.onEditClick.bind(this)} className="btn btn-sm btn-primary action-btn">Edit
+                <button onClick={this.onEditClick} className="btn btn-sm btn-primary action-btn">Edit
                 </button>
-                <button onClick={this.onDeleteClick.bind(this)} className="btn btn-sm btn-danger">Delete</button>
+                <button onClick={this.onDeleteClick} className="btn btn-sm btn-danger">Delete</button>
             </td>
         );
-    }
+    };
 
-    render_items() {
+    render_items = () => {
         if (this.state.isEditing) {
             return (
                 <tr>
-                    <td><input type="text" defaultValue={this.props.name} ref="editItemName"/></td>
-                    <td><input type="text" defaultValue={this.props.status} ref="editItemStatus"/></td>
+                    <td>
+                        <input
+                            type="text"
+                            name="name"
+                            defaultValue={this.state.name}
+                            value={this.state.name}
+                            onChange={this.onInputChanged}/>
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            name="status"
+                            defaultValue={this.state.status}
+                            value={this.state.status}
+                            onChange={this.onInputChanged}/>
+                    </td>
                     <td>{this.props.date_added}</td>
                     {this.renderActions()}
                 </tr>
@@ -43,36 +65,33 @@ class ItemList extends Component {
         }
         return (
             <tr>
-                <td>{this.props.name}</td>
-                <td>{this.props.status}</td>
-                <td>{this.props.date_added}</td>
+                <td>{this.state.name}</td>
+                <td>{this.state.status}</td>
+                <td>{this.state.date_added}</td>
                 {this.renderActions()}
             </tr>
         );
-    }
+    };
 
     render() {
         return this.render_items();
 
     }
 
-    onEditClick() {
+    onEditClick = () => {
         this.setState({isEditing: true})
-    }
+    };
 
-    onCancelClick() {
+    onCancelClick = () => {
         this.setState({isEditing: false})
-    }
+    };
 
-    onSaveClick(event) {
+    onSaveClick = (event) => {
         event.preventDefault();
-        const item = this.refs.editItemName.value;
-        const status = this.refs.editItemStatus.value;
-
         axiosInstance.put(`/buckets/${this.props.bucket_id}/items/${this.props.id}`,
             {
-                item,
-                status
+                item: this.state.name,
+                status: this.state.status,
             })
             .then((response) => {
                 this.setState({isEditing: false});
@@ -81,12 +100,12 @@ class ItemList extends Component {
             .catch((error) => {
                 console.log(error);
             });
-    }
+    };
 
-    onDeleteClick(event) {
+    onDeleteClick = (event) => {
         event.preventDefault();
         axiosInstance.delete(`/buckets/${this.props.bucket_id}/items/${this.props.id}`)
-            .then((response) => {
+            .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteItem(this.props.id);
             })
