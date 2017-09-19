@@ -85,6 +85,7 @@ class BucketList extends Component {
         this.setState({isEditing: false})
     };
 
+    // Displays the actions operable on a bucket
     renderActions = () => {
         if (this.state.isEditing) {
             return (
@@ -132,9 +133,9 @@ class BucketList extends Component {
 
         return (
             <tr>
-                <td onClick={this.onViewBucketClick}>{this.props.name}</td>
-                <td>{this.props.desc}</td>
-                <td>{this.props.date_added}</td>
+                <td onClick={this.onViewBucketClick}>{this.state.bucket}</td>
+                <td>{this.state.desc}</td>
+                <td>{this.state.date_added}</td>
                 {this.renderActions()}
             </tr>
         );
