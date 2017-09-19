@@ -6,6 +6,10 @@ import '../App.css';
 // helpers
 import axiosInstance from './config';
 
+const initialState = {
+    item: ''
+};
+
 class AddItem extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +19,10 @@ class AddItem extends Component {
         };
 
     }
+
+    resetState = () => {
+        this.setState(initialState);
+    };
 
     /*
     * Fired when input changes
@@ -38,6 +46,7 @@ class AddItem extends Component {
             })
             .then((response) => {
                 this.props.addItem(response.data);
+                this.resetState();
             })
             .catch((error) => {
                 console.log(error);
