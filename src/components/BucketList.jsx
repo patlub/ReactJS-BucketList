@@ -99,46 +99,48 @@ class BucketList extends Component {
         return (
             <td>
                 <span onClick={this.onEditClick} className="glyphicon glyphicon-pencil edit"></span>
-                <span onClick={this.onCancelClick} className="glyphicon glyphicon-trash remove"></span>
+                <span onClick={this.onDeleteClick} className="glyphicon glyphicon-trash remove"></span>
             </td>
         );
     };
 
+    // Displays the buckets
     renderBuckets = () => {
         if (this.state.isEditing) {
-            return (
-                <tr>
-                    <td>
-                        <input
-                            type="text"
-                            name="bucket"
-                            defaultValue={this.state.bucket}
-                            value={this.state.bucket}
-                            onChange={this.onInputChanged}/>
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            name="desc"
-                            defaultValue={this.state.bucket}
-                            value={this.state.desc}
-                            onChange={this.onInputChanged}/>
-                    </td>
-                    <td>{this.props.date_added}</td>
-                    {this.renderActions()}
-                </tr>
-            );
+            return this.editingState();
         }
-
         return (
             <tr>
-                <td onClick={this.onViewBucketClick}>{this.state.bucket}</td>
+                <td onClick={this.onViewBucketClick} className="bucket-name">{this.state.bucket}</td>
                 <td>{this.state.desc}</td>
                 <td>{this.props.date_added}</td>
                 {this.renderActions()}
             </tr>
         );
     };
+
+    editingState = () => (
+        <tr>
+            <td>
+                <input
+                    type="text"
+                    name="bucket"
+                    defaultValue={this.state.bucket}
+                    value={this.state.bucket}
+                    onChange={this.onInputChanged}/>
+            </td>
+            <td>
+                <input
+                    type="text"
+                    name="desc"
+                    defaultValue={this.state.bucket}
+                    value={this.state.desc}
+                    onChange={this.onInputChanged}/>
+            </td>
+            <td>{this.props.date_added}</td>
+            {this.renderActions()}
+        </tr>
+    );
 
     render() {
         return this.renderBuckets();
