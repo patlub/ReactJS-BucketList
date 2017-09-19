@@ -81,7 +81,7 @@ class Buckets extends Component {
                     <AddItem
                         bucket_id={this.state.bucketId}
                         addItem={this.addItem}/>
-                    <div className="col-sm-7">No Items</div>
+                    <div className="col-sm-7">Bucket is Empty</div>
                 </div>
             );
         }
