@@ -5,7 +5,7 @@ const ItemTableHeader = () => (
     <thead>
     <tr>
         <th>Item</th>
-        <th>Status</th>
+        <th>status</th>
         <th>Date Added</th>
         <th>Action</th>
     </tr>
