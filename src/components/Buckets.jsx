@@ -83,7 +83,7 @@ class Buckets extends Component {
         return (
             <div className="col-md-5 col-sm-12 col-xs-12">
                 <AddItem
-                    bucket_id={this.state.bucketId}
+                    bucketId={this.state.bucketId}
                     addItem={this.addItem}/>
                 <table className="table table-responsive table-striped">
                     <ItemtableHeader/>
@@ -101,7 +101,7 @@ class Buckets extends Component {
     emptyBucketSection = () => (
         <div className="col-md-5 col-sm-12 col-xs-12">
             <AddItem
-                bucket_id={this.state.bucketId}
+                bucketId={this.state.bucketId}
                 addItem={this.addItem}/>
             <div className="col-sm-7">Bucket is Empty</div>
         </div>
@@ -217,13 +217,11 @@ class Buckets extends Component {
     * Map buckets to a BucketLists
     * */
     renderBuckets = () => {
-        return _.map(
-            this.state.buckets,
-            (bucket, index) => <BucketList key={index}{...bucket}
-                                           deleteBucket={this.deleteBucket.bind(this)}
-                                           updateBuckets={this.updateBuckets.bind(this)}
-                                           getItems={this.getItems.bind(this)}/>
-        )
+        return (
+            this.state.buckets.map(bucket => (<BucketList key={bucket.id}{...bucket}
+                                                          deleteBucket={this.deleteBucket.bind(this)}
+                                                          updateBuckets={this.updateBuckets.bind(this)}
+                                                          getItems={this.getItems.bind(this)}/>)));
     };
 
     /*
@@ -231,11 +229,10 @@ class Buckets extends Component {
     * Map items to ItemLists
     * */
     renderItems = () => {
-        return _.map(
-            this.state.items,
-            (item, index) => <ItemList key={index}{...item}
-                                       updateItems={this.updateItems.bind(this)}
-                                       deleteItem={this.deleteItem.bind(this)}/>)
+        return (
+            this.state.items.map(item => (<ItemList key={item.id}{...item}
+                                                    updateItems={this.updateItems.bind(this)}
+                                                    deleteItem={this.deleteItem.bind(this)}/>)));
     };
 }
 
