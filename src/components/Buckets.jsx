@@ -25,7 +25,6 @@ class Buckets extends Component {
         };
     }
 
-    // Fetch buckets before render
     componentWillMount() {
         if (!this.state.buckets) {
             this.getBuckets();
@@ -47,7 +46,9 @@ class Buckets extends Component {
             </div>
         );
     }
-
+    /*
+    * Render buckets section
+    * */
     bucketSection = () => {
         // If there are no buckets
         if (this.state.buckets.length === 0) {
@@ -68,6 +69,9 @@ class Buckets extends Component {
         );
     };
 
+    /*
+    * Rendered if there are no buckets
+    * */
     noBuckets = () => {
         return (
             <div className="container-fluid">
@@ -76,6 +80,7 @@ class Buckets extends Component {
             </div>
         );
     };
+
     itemSection = () => {
         // If there are no items
         if (this.state.items.length === 0) {
