@@ -26,6 +26,7 @@
     margin-top: 1%;
     margin-right: 5%;
 }
+
 #logout-btn {
     margin-top: 1%;
     margin-right: 5%;
@@ -35,21 +36,59 @@
     background-color: #12a5a5;
     padding-left: 2%;
 }
-.nav-tab{
+
+.nav-tab {
     margin-top: 2%;
     color: white;
 }
-.nav-tab a{
-    color: white!important;
+
+.nav-tab a {
+    color: white !important;
 }
 
 #app-title {
     color: #ffffff;
 }
-.action-btn{
+
+.action-btn {
     margin-right: 2%;
 }
 
+.edit {
+    color: blue;
+    font-size: large;
+    padding-right: 30%;
+}
+
+.remove {
+    color: red;
+    font-size: large;
+
+}
+
+.save {
+    color: green;
+    font-size: large;
+    padding-right: 30%;
+}
+
+.cancel {
+    color: black;
+    font-size: large;
+}
+
+.done {
+    color: green;
+    font-size: large;
+}
+.bucket-name {
+    color: blue;
+}
+
+.bucket-name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 @keyframes App-logo-spin {
     from {
