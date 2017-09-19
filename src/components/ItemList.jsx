@@ -19,6 +19,7 @@ class ItemList extends Component {
         })
     };
 
+    // Edit, Delete, actions section
     renderActions = () => {
         if (this.state.isEditing) {
             return (
@@ -38,6 +39,7 @@ class ItemList extends Component {
         );
     };
 
+    // Displays items table row depending on isEditing state
     render_items = () => {
         if (this.state.isEditing) {
             return (
@@ -86,6 +88,10 @@ class ItemList extends Component {
         this.setState({isEditing: false})
     };
 
+    /*
+    * Updates a bucket
+    * @param {event} event fired when updating bucket
+    * */
     onSaveClick = (event) => {
         event.preventDefault();
         axiosInstance.put(`/buckets/${this.props.bucket_id}/items/${this.props.id}`,
@@ -102,6 +108,10 @@ class ItemList extends Component {
             });
     };
 
+    /*
+    * Deletes a bucket
+    * @param {event} event fired when deleting a bucket
+    * */
     onDeleteClick = (event) => {
         event.preventDefault();
         axiosInstance.delete(`/buckets/${this.props.bucket_id}/items/${this.props.id}`)
