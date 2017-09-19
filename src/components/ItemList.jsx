@@ -24,17 +24,15 @@ class ItemList extends Component {
         if (this.state.isEditing) {
             return (
                 <td>
-                    <button onClick={this.onSaveClick} className="btn btn-sm btn-success action-btn">Save
-                    </button>
-                    <button onClick={this.onCancelClick} className="btn btn-sm btn-default">Cancel</button>
+                    <span onClick={this.onSaveClick} className="glyphicon glyphicon-floppy-disk save"></span>
+                    <span onClick={this.onCancelClick} className="glyphicon glyphicon-ban-circle cancel"></span>
                 </td>
             );
         }
         return (
             <td>
-                <button onClick={this.onEditClick} className="btn btn-sm btn-primary action-btn">Edit
-                </button>
-                <button onClick={this.onDeleteClick} className="btn btn-sm btn-danger">Delete</button>
+                <span onClick={this.onEditClick} className="glyphicon glyphicon-pencil edit"></span>
+                <span onClick={this.onCancelClick} className="glyphicon glyphicon-trash remove"></span>
             </td>
         );
     };
