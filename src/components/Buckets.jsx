@@ -51,12 +51,7 @@ class Buckets extends Component {
     bucketSection = () => {
         // If there are no buckets
         if (this.state.buckets.length === 0) {
-            return (
-                <div className="container-fluid">
-                    <AddBucket addBucket={this.addBucket}/>
-                    <div className="col-sm-7">No bucket Lists</div>
-                </div>
-            );
+            return this.noBuckets();
         }
 
         // Display the buckets
@@ -73,6 +68,14 @@ class Buckets extends Component {
         );
     };
 
+    noBuckets = () => {
+        return (
+            <div className="container-fluid">
+                <AddBucket addBucket={this.addBucket}/>
+                <div className="col-sm-7">No bucket Lists</div>
+            </div>
+        );
+    };
     itemSection = () => {
         // If there are no items
         if (this.state.items.length === 0) {
