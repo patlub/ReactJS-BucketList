@@ -40,7 +40,7 @@ class AddItem extends Component {
      */
     addItem = (event) => {
         event.preventDefault();
-        axiosInstance.post(`/buckets/${this.props.bucket_id}/items`,
+        axiosInstance.post(`/buckets/${this.props.bucketId}/items`,
             {
                 item: this.state.item,
             })
