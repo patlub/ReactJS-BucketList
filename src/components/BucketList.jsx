@@ -119,6 +119,7 @@ class BucketList extends Component {
         );
     };
 
+    // Rendered when state isEditing is true
     editingState = () => (
         <tr>
             <td>

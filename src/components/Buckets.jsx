@@ -76,14 +76,7 @@ class Buckets extends Component {
     itemSection = () => {
         // If there are no items
         if (this.state.items.length === 0) {
-            return (
-                <div className="col-md-5 col-sm-12 col-xs-12">
-                    <AddItem
-                        bucket_id={this.state.bucketId}
-                        addItem={this.addItem}/>
-                    <div className="col-sm-7">Bucket is Empty</div>
-                </div>
-            );
+            return this.emptyBucketSection();
         }
 
         // Display the items
@@ -101,6 +94,18 @@ class Buckets extends Component {
             </div>
         );
     };
+
+    /*
+    * Rendered if the bucket has no items
+    * */
+    emptyBucketSection = () => (
+        <div className="col-md-5 col-sm-12 col-xs-12">
+            <AddItem
+                bucket_id={this.state.bucketId}
+                addItem={this.addItem}/>
+            <div className="col-sm-7">Bucket is Empty</div>
+        </div>
+    );
 
     /*
     *
