@@ -79,7 +79,6 @@ class Buckets extends Component {
             return (
                 <div className="col-md-5 col-sm-12 col-xs-12">
                     <AddItem
-                        items={this.state.items}
                         bucket_id={this.state.bucketId}
                         addItem={this.addItem}/>
                     <div className="col-sm-7">No Items</div>
@@ -91,7 +90,6 @@ class Buckets extends Component {
         return (
             <div className="col-md-5 col-sm-12 col-xs-12">
                 <AddItem
-                    items={this.state.items}
                     bucket_id={this.state.bucketId}
                     addItem={this.addItem}/>
                 <table className="table table-responsive table-striped">
@@ -105,8 +103,8 @@ class Buckets extends Component {
     };
 
     /*
-    * Fetches the buckets
     *
+    * Fetches the buckets from API
     * */
     getBuckets = () => {
         axiosInstance.get('/buckets')
