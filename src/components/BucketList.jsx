@@ -135,7 +135,7 @@ class BucketList extends Component {
             <tr>
                 <td onClick={this.onViewBucketClick}>{this.state.bucket}</td>
                 <td>{this.state.desc}</td>
-                <td>{this.state.date_added}</td>
+                <td>{this.props.date_added}</td>
                 {this.renderActions()}
             </tr>
         );
