@@ -117,10 +117,7 @@ class ItemList extends Component {
         if (this.state.isEditing) {
             return this.editItemSection();
         }
-        if (this.state.status === "true") {
-            return this.sectionForItemStatusTrue();
-        }
-        return this.sectionForItemStatusFalse();
+        return this.sectionForItem();
     };
 
     /*
@@ -135,38 +132,37 @@ class ItemList extends Component {
                     value={this.state.name}
                     onChange={this.onInputChanged}/>
             </td>
+            {this.itemStatus()}
             <td>{this.props.date_added}</td>
             {this.renderActions()}
         </tr>
     );
 
     /*
-    * Rendered when bucket item is set to completed
+    * Section for displaying an item
     * */
-    sectionForItemStatusTrue = () => (
+    sectionForItem = () => (
         <tr>
             <td onClick={this.changeStatus}>
                 {this.state.name}
             </td>
-            <td><span className="glyphicon glyphicon-ok done"></span></td>
+            {this.itemStatus()}
             <td>{this.props.date_added}</td>
             {this.renderActions()}
         </tr>
     );
 
     /*
-    * Rendered when bucket item is not completed
+    * Return glyph if item status is true
     * */
-    sectionForItemStatusFalse = () => (
-        <tr>
-            <td onClick={this.changeStatus}>
-                {this.state.name}
-            </td>
-            <td></td>
-            <td>{this.props.date_added}</td>
-            {this.renderActions()}
-        </tr>
-    );
+    itemStatus = () => {
+        if (this.state.status === "true") {
+            return (
+                <td><span className="glyphicon glyphicon-ok done"></span></td>
+            );
+        }
+        return (<td></td>);
+    };
 
     render() {
         return this.render_items();
