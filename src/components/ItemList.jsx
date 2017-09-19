@@ -14,7 +14,6 @@ class ItemList extends Component {
     }
 
     onInputChanged = (event) => {
-        console.log(this.state.status);
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -91,7 +90,9 @@ class ItemList extends Component {
         this.setState({isEditing: false})
     };
 
-    // Edit, Delete, actions section
+    /*
+    * Edit, Delete, actions section
+    * */
     renderActions = () => {
         if (this.state.isEditing) {
             return (
@@ -109,9 +110,10 @@ class ItemList extends Component {
         );
     };
 
-    // Displays items table row depending on isEditing state
+    /*
+     *Displays items table row depending on isEditing state
+    * */
     render_items = () => {
-        console.log(this.state.status);
         if (this.state.isEditing) {
             return this.editItemSection();
         }
@@ -121,6 +123,9 @@ class ItemList extends Component {
         return this.sectionForItemStatusFalse();
     };
 
+    /*
+    * Rendered when bucket item is being edited
+    * */
     editItemSection = () => (
         <tr>
             <td>
@@ -135,6 +140,9 @@ class ItemList extends Component {
         </tr>
     );
 
+    /*
+    * Rendered when bucket item is set to completed
+    * */
     sectionForItemStatusTrue = () => (
         <tr>
             <td onClick={this.changeStatus}>
@@ -146,6 +154,9 @@ class ItemList extends Component {
         </tr>
     );
 
+    /*
+    * Rendered when bucket item is not completed
+    * */
     sectionForItemStatusFalse = () => (
         <tr>
             <td onClick={this.changeStatus}>
@@ -160,7 +171,6 @@ class ItemList extends Component {
     render() {
         return this.render_items();
     }
-
 }
 
 export default ItemList;
