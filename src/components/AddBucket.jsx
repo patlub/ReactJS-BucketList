@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import '../App.css';
 import axiosInstance from './config';
 
+const initialState = {
+    bucket: '',
+    desc: '',
+};
+
 class AddBucket extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +16,10 @@ class AddBucket extends Component {
             desc: '',
         };
     }
+
+    resetState = () => {
+        this.setState(initialState);
+    };
 
     /*
     * Fired when input changes
@@ -35,6 +44,8 @@ class AddBucket extends Component {
             })
             .then((response) => {
                 this.props.addBucket(response.data);
+                // Empty state
+                this.resetState()
             })
             .catch((error) => {
                 console.log(error);
