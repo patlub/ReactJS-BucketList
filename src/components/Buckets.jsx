@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+
+//Stateful components
 import AddBucket from './AddBucket';
 import AddItem from './AddItem';
-import '../App.css';
-import NavBar from './NavBar';
-import axiosInstance from './config';
-import _ from 'lodash';
 import BucketList from './BucketList';
 import ItemList from './ItemList';
+
+//styles
+import '../App.css';
+
+//Third party library
+import _ from 'lodash';
+import {baseURL} from './config';
+
+//stateless components
+import NavBar from './NavBar';
 import BucketTableHeader from './BucketTableHeader';
 import ItemtableHeader from './ItemTableHeader';
+
+//configs
+import axios from 'axios'
 
 let bucketLists = [];
 let items = [];
@@ -24,17 +35,16 @@ class Buckets extends Component {
         };
     }
 
-    componentDidMount() {
-            this.getBuckets()
-                .then((allbucketLists) => {
-                    bucketLists = allbucketLists;
-                    this.setState({buckets: bucketLists})
-                })
-                .catch(err => console.log(err))
+    componentWillMount() {
+        this.getBuckets()
+            .then((allbucketLists) => {
+                bucketLists = allbucketLists;
+                this.setState({buckets: bucketLists})
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
-        console.log(this.state);
         // Check if they are logged in
         if (!localStorage.getItem('token')) {
             return <Redirect to="/login"/>
@@ -123,7 +133,7 @@ class Buckets extends Component {
     * Fetches the buckets from API
     * */
     getBuckets = () => {
-        return axiosInstance.get('/buckets')
+        return axios.get(`${baseURL}/buckets`, {headers: {'Authorization': localStorage.getItem('token')}})
             .then(response => {
                     return response.data
                 }
