@@ -4,7 +4,9 @@ import React, {Component} from 'react';
 import '../App.css';
 
 // helpers
-import axiosInstance from './config';
+import {baseURL} from './config';
+import axios from 'axios'
+
 
 const initialState = {
     item: ''
@@ -40,7 +42,8 @@ class AddItem extends Component {
      */
     addItem = (event) => {
         event.preventDefault();
-        axiosInstance.post(`/buckets/${this.props.bucketId}/items`,
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.post(`${baseURL}/buckets/${this.props.bucketId}/items`,
             {
                 item: this.state.item,
             })
