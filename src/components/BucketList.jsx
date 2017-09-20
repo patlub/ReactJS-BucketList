@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import '../App.css';
-import axiosInstance from './config';
+import {baseURL} from './config';
+import axios from 'axios'
+
 import _ from 'lodash';
 
 class BucketList extends Component {
@@ -28,7 +30,8 @@ class BucketList extends Component {
      */
     onViewBucketClick = () => {
         const bucketListItems = [];
-        axiosInstance.get(`/items/${this.props.id}`)
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.get(`${baseURL}/items/${this.props.id}`)
             .then(function (response) {
                 if (response.status === 200) {
                     _.forEach(response.data, function (value) {
@@ -48,12 +51,13 @@ class BucketList extends Component {
      */
     onSaveClick = (event) => {
         event.preventDefault();
-        axiosInstance.put(`/buckets/${this.props.id}`,
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.put(`${baseURL}/buckets/${this.props.id}`,
             {
                 bucket: this.state.bucket,
                 desc: this.state.desc,
             })
-            .then((response) => {
+            .then(() => {
                 this.setState({isEditing: false});
                 this.props.updateBuckets(this.props.id, this.state.bucket, this.state.desc);
             })
@@ -67,8 +71,9 @@ class BucketList extends Component {
      */
     onDeleteClick = (event) => {
         event.preventDefault();
-        axiosInstance.delete(`/buckets/${this.props.id}`)
-            .then((response) => {
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.delete(`${baseURL}/buckets/${this.props.id}`)
+            .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteBucket(this.props.id);
             })
@@ -126,7 +131,6 @@ class BucketList extends Component {
                 <input
                     type="text"
                     name="bucket"
-                    defaultValue={this.state.bucket}
                     value={this.state.bucket}
                     onChange={this.onInputChanged}/>
             </td>
@@ -134,7 +138,6 @@ class BucketList extends Component {
                 <input
                     type="text"
                     name="desc"
-                    defaultValue={this.state.bucket}
                     value={this.state.desc}
                     onChange={this.onInputChanged}/>
             </td>
