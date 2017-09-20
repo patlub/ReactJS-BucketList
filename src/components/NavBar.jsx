@@ -10,12 +10,6 @@ function NavBar() {
                 <h3 id="app-title">BucketList</h3>
             </div>
             <div className="col-md-2 col-sm-2 nav-tab text-center">
-                <a href="#" data-toggle="modal" data-target="#addBucketModal">
-                    Add Bucket
-                </a>
-
-            </div>
-            <div className="col-md-2 col-sm-2 nav-tab text-center">
                 <Link to="logout">Logout</Link>
             </div>
         </div>
