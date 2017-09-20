@@ -5,7 +5,9 @@ import {Link, Redirect} from 'react-router-dom';
 import '../App.css';
 
 // helpers
-import axiosInstance from './config';
+import {baseURL} from './config';
+
+import axios from 'axios'
 
 class Register extends Component {
     constructor(props) {
@@ -35,7 +37,7 @@ class Register extends Component {
     onRegisterClick = (event) => {
         console.log(this.state);
         event.preventDefault();
-        axiosInstance.post(`/auth/register`,
+        axios.post(`${baseURL}/auth/register`,
             {
                 name: this.state.name,
                 email: this.state.email,
@@ -54,7 +56,7 @@ class Register extends Component {
 
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/"/>
+            return <Redirect to="/buckets"/>
         }
 
         return (
