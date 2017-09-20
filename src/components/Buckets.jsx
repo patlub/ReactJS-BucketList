@@ -11,32 +11,34 @@ import ItemList from './ItemList';
 import BucketTableHeader from './BucketTableHeader';
 import ItemtableHeader from './ItemTableHeader';
 
-const bucketLists = [];
+let bucketLists = [];
 let items = [];
 
 class Buckets extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            token: localStorage.getItem('token'),
-            buckets: '',
-            items: '',
+            buckets: [],
+            items: [],
             bucketId: '',
         };
     }
 
-    componentWillMount() {
-        if (!this.state.buckets) {
-            this.getBuckets();
-        }
+    componentDidMount() {
+            this.getBuckets()
+                .then((allbucketLists) => {
+                    bucketLists = allbucketLists;
+                    this.setState({buckets: bucketLists})
+                })
+                .catch(err => console.log(err))
     }
 
     render() {
+        console.log(this.state);
         // Check if they are logged in
-        if (!this.state.token) {
+        if (!localStorage.getItem('token')) {
             return <Redirect to="/login"/>
         }
-
         // Show both buckets and items
         return (
             <div className="container-fluid">
@@ -46,12 +48,13 @@ class Buckets extends Component {
             </div>
         );
     }
+
     /*
     * Render buckets section
     * */
     bucketSection = () => {
         // If there are no buckets
-        if (this.state.buckets.length === 0) {
+        if (!this.state.buckets) {
             return this.noBuckets();
         }
 
@@ -120,19 +123,12 @@ class Buckets extends Component {
     * Fetches the buckets from API
     * */
     getBuckets = () => {
-        axiosInstance.get('/buckets')
-            .then(function (response) {
-                if (response.status === 200) {
-                    bucketLists.length = 0;
-                    _.forEach(response.data, function (value) {
-                        bucketLists.push(value);
-                    });
-                    this.setState({buckets: bucketLists});
+        return axiosInstance.get('/buckets')
+            .then(response => {
+                    return response.data
                 }
-            }.bind(this))
-            .catch(function (error) {
-                console.log(error);
-            });
+            )
+            .catch(err => console.log(err));
     };
 
     /*
