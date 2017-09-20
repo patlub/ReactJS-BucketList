@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
-// import {Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 class Logout extends Component {
@@ -10,8 +10,8 @@ class Logout extends Component {
     }
 
     render() {
-        return window.location = '/login';
-        // return <Redirect to="/login"/>
+        return <Redirect to="/login"/>
     }
 }
+
 export default Logout;
