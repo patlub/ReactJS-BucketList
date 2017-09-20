@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
-import axiosInstance from './config';
+import {baseURL} from './config';
+import axios from 'axios'
 
 const initialState = {
     bucket: '',
@@ -37,7 +38,8 @@ class AddBucket extends Component {
      */
     onAddBucketHandler = (event) => {
         event.preventDefault();
-        axiosInstance.post(`/buckets`,
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.post(`${baseURL}/buckets`,
             {
                 bucket: this.state.bucket,
                 desc: this.state.desc
