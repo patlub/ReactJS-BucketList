@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<BrowserRouter>
         <div>
-            <Route path='/' component={Buckets} />
+            <Route path='/buckets' component={Buckets} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/forgot_password' component={ForgotPassword}/>
