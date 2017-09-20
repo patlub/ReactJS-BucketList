@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
-import axiosInstance from './config';
+import {baseURL} from './config';
+import axios from 'axios'
 
 
 class ItemList extends Component {
@@ -25,7 +26,8 @@ class ItemList extends Component {
     * */
     onSaveClick = (event) => {
         event.preventDefault();
-        axiosInstance.put(`/buckets/${this.props.bucket_id}/items/${this.props.id}`,
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.put(`${baseURL}/buckets/${this.props.bucket_id}/items/${this.props.id}`,
             {
                 item: this.state.name,
                 status: this.state.status,
@@ -50,7 +52,8 @@ class ItemList extends Component {
             newStatus = "true"
         }
         this.setState({status: newStatus}, () => {
-            axiosInstance.put(`/buckets/${this.props.bucket_id}/items/${this.props.id}`,
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+            axios.put(`${baseURL}/buckets/${this.props.bucket_id}/items/${this.props.id}`,
                 {
                     item: this.state.name,
                     status: this.state.status,
@@ -72,7 +75,8 @@ class ItemList extends Component {
     * */
     onDeleteClick = (event) => {
         event.preventDefault();
-        axiosInstance.delete(`/buckets/${this.props.bucket_id}/items/${this.props.id}`)
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        axios.delete(`${baseURL}/buckets/${this.props.bucket_id}/items/${this.props.id}`)
             .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteItem(this.props.id);
