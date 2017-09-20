@@ -5,8 +5,10 @@ import {Link, Redirect} from 'react-router-dom';
 import '../App.css';
 
 // configs
-import axiosInstance from './config';
+import {baseURL} from './config';
 
+// Third party
+import axios from 'axios'
 
 class Login extends Component {
     constructor(props) {
@@ -35,7 +37,7 @@ class Login extends Component {
      */
     onLoginHandler = (event) => {
         event.preventDefault();
-        axiosInstance.post(`/auth/login`,
+        axios.post(`${baseURL}/auth/login`,
             {
                 email: this.state.email,
                 password: this.state.password
@@ -52,7 +54,7 @@ class Login extends Component {
 
     render() {
         if (this.state.loggedIn) {
-            return <Redirect to="/"/>
+            return <Redirect to="/buckets"/>
         }
         else {
             return (
