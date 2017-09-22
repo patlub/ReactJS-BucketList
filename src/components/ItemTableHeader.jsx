@@ -1,4 +1,6 @@
 import React from 'react';
+
+// styles
 import '../App.css';
 
 function ItemTableHeader() {

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
+
+// styles
 import '../App.css';
+
+// helpers
 import {baseURL} from './config';
 import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
