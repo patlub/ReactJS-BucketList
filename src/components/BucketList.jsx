@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import '../App.css';
 import {baseURL} from './config';
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 import _ from 'lodash';
 
@@ -14,6 +16,14 @@ class BucketList extends Component {
             desc: this.props.desc,
         };
     }
+
+    resetState = () => {
+        this.setState({
+            isEditing: false,
+            bucket: this.props.name,
+            desc: this.props.desc,
+        })
+    };
 
     /*
     * Fired when input changes
@@ -60,9 +70,10 @@ class BucketList extends Component {
             .then(() => {
                 this.setState({isEditing: false});
                 this.props.updateBuckets(this.props.id, this.state.bucket, this.state.desc);
+                NotificationManager.success(`Bucket updated`, `Success`);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                NotificationManager.error(`Bucket ${this.state.bucket} already exists`, `Error`);
             });
     };
 
@@ -76,9 +87,10 @@ class BucketList extends Component {
             .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteBucket(this.props.id);
+                NotificationManager.success(`Bucket Deleted`, `Deleted`);
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(`Could not delete bucket`, `Error`);
             });
     };
 
@@ -87,7 +99,7 @@ class BucketList extends Component {
     };
 
     onCancelClick = () => {
-        this.setState({isEditing: false})
+        this.resetState();
     };
 
     // Displays the actions operable on a bucket
@@ -120,6 +132,7 @@ class BucketList extends Component {
                 <td>{this.state.desc}</td>
                 <td>{this.props.date_added}</td>
                 {this.renderActions()}
+                <NotificationContainer/>
             </tr>
         );
     };
