@@ -5,7 +5,7 @@ import {Link, Redirect} from 'react-router-dom';
 import '../App.css';
 
 // configs
-import {baseURL} from './config';
+import {baseURL} from '../configs/config';
 
 // Third party
 import axios from 'axios'

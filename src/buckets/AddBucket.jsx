@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import '../App.css';
 
 // configs
-import {baseURL} from './config';
+import {baseURL} from '../configs/config';
 
 // Third party
 import axios from 'axios'

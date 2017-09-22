@@ -3,21 +3,21 @@ import {Redirect} from 'react-router-dom';
 
 //Stateful components
 import AddBucket from './AddBucket';
-import AddItem from './AddItem';
+import AddItem from '../items/AddItem';
 import BucketList from './BucketList';
-import ItemList from './ItemList';
+import ItemList from '../items/ItemList';
 
 //styles
 import '../App.css';
 
 //Third party library
 import _ from 'lodash';
-import {baseURL} from './config';
+import {baseURL} from '../configs/config';
 
 //stateless components
-import NavBar from './NavBar';
-import BucketTableHeader from './BucketTableHeader';
-import ItemtableHeader from './ItemTableHeader';
+import NavBar from '../components/NavBar';
+import BucketTableHeader from '../components/BucketTableHeader';
+import ItemtableHeader from '../components/ItemTableHeader';
 
 //configs
 import axios from 'axios'
