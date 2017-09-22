@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
+
+// styles
 import '../App.css';
+
+// configs
 import {baseURL} from './config';
+
+// Third party
 import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 

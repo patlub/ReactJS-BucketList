@@ -4,9 +4,10 @@ import {Link, Redirect} from 'react-router-dom';
 // styles
 import '../App.css';
 
-// helpers
+// configs
 import {baseURL} from './config';
 
+// Third party
 import axios from 'axios'
 
 class Register extends Component {
