@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import {baseURL} from './config';
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 class ItemList extends Component {
@@ -13,6 +14,14 @@ class ItemList extends Component {
             status: this.props.status,
         };
     }
+
+    resetState = () => {
+        this.setState({
+            isEditing: false,
+            name: this.props.name,
+            status: this.props.status,
+        })
+    };
 
     onInputChanged = (event) => {
         this.setState({
@@ -35,9 +44,10 @@ class ItemList extends Component {
             .then((response) => {
                 this.setState({isEditing: false});
                 this.props.updateItems(response.data, this.props.id);
+                NotificationManager.success(`Item updated`, `Success`);
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(`Item ${this.state.name} already exists`, `Error`);
             });
     };
 
@@ -80,9 +90,10 @@ class ItemList extends Component {
             .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteItem(this.props.id);
+                NotificationManager.success(`Item Deleted`, `Deleted`);
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(`Could not delete item`, `Error`);
             });
     };
 
@@ -91,7 +102,7 @@ class ItemList extends Component {
     };
 
     onCancelClick = () => {
-        this.setState({isEditing: false})
+        this.resetState();
     };
 
     /*
@@ -153,6 +164,7 @@ class ItemList extends Component {
             {this.itemStatus()}
             <td>{this.props.date_added}</td>
             {this.renderActions()}
+            <NotificationContainer/>
         </tr>
     );
 
