@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import '../App.css';
 import {baseURL} from './config';
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 const initialState = {
     bucket: '',
@@ -38,6 +40,7 @@ class AddBucket extends Component {
      */
     onAddBucketHandler = (event) => {
         event.preventDefault();
+
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios.post(`${baseURL}/buckets`,
             {
@@ -46,11 +49,12 @@ class AddBucket extends Component {
             })
             .then((response) => {
                 this.props.addBucket(response.data);
+                NotificationManager.success(`Bucket ${this.state.bucket} has been created`, `Success`);
                 // Empty state
                 this.resetState()
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(`Bucket ${this.state.bucket} already exists`, `Error`);
             });
     };
 
@@ -83,6 +87,7 @@ class AddBucket extends Component {
                     <button type="submit" className="btn btn-primary">Add Bucket
                     </button>
                 </div>
+                <NotificationContainer/>
             </form>
         );
     }

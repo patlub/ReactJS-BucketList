@@ -6,6 +6,7 @@ import '../App.css';
 // helpers
 import {baseURL} from './config';
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const initialState = {
@@ -49,10 +50,11 @@ class AddItem extends Component {
             })
             .then((response) => {
                 this.props.addItem(response.data);
+                NotificationManager.success(`Item ${this.state.item} has been created`, `Success`);
                 this.resetState();
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(`Item ${this.state.item} already exists`, `Error`);
             });
 
     };
@@ -75,6 +77,7 @@ class AddItem extends Component {
                     <button type="submit" className="btn btn-primary">Add Item
                     </button>
                 </div>
+                <NotificationContainer/>
             </form>
         );
     }
