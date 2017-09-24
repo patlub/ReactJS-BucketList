@@ -64,7 +64,7 @@ class Buckets extends Component {
     * */
     bucketSection = () => {
         // If there are no buckets
-        if (!this.state.buckets) {
+        if (this.state.buckets.length === 0) {
             return this.noBuckets();
         }
 

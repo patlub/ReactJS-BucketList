@@ -59,7 +59,7 @@ class AddBucket extends Component {
                 // Empty state
                 this.resetState()
             })
-            .catch((error) => {
+            .catch(() => {
                 NotificationManager.error(`Bucket ${this.state.bucket} already exists`, `Error`);
             });
     };

@@ -47,12 +47,10 @@ class BucketList extends Component {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios.get(`${baseURL}/items/${this.props.id}`)
             .then(function (response) {
-                if (response.status === 200) {
-                    _.forEach(response.data, function (value) {
-                        bucketListItems.push(value);
-                    });
-                    this.props.getItems(bucketListItems, this.props.id);
-                }
+                _.forEach(response.data, function (value) {
+                    bucketListItems.push(value);
+                });
+                this.props.getItems(bucketListItems, this.props.id);
             }.bind(this))
             .catch(function (error) {
                 console.log(error);

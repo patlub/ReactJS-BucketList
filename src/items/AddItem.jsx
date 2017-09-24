@@ -55,7 +55,7 @@ class AddItem extends Component {
                 NotificationManager.success(`Item ${this.state.item} has been created`, `Success`);
                 this.resetState();
             })
-            .catch((error) => {
+            .catch(() => {
                 NotificationManager.error(`Item ${this.state.item} already exists`, `Error`);
             });
 
