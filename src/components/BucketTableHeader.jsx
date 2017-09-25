@@ -1,7 +1,7 @@
+import React from 'react';
+
 // styles
 import '../App.css';
-
-import React from 'react';
 
 function BucketTableHeader() {
   return (

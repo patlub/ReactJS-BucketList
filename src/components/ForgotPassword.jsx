@@ -1,8 +1,8 @@
-// styles
-import '../App.css';
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+// styles
+import '../App.css';
 
 class ForgotPassword extends Component {
   render() {
