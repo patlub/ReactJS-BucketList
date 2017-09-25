@@ -10,7 +10,6 @@ import {baseURL} from '../configs/config';
 import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-
 class ItemList extends Component {
     constructor(props) {
         super(props);
@@ -92,7 +91,7 @@ class ItemList extends Component {
     onDeleteClick = (event) => {
         event.preventDefault();
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.delete(`${baseURL}/buckets/${this.props.bucket_id}/items/${this.props.id}`)
+        axios.delete(`${baseURL}/items/${this.props.id}`)
             .then(() => {
                 this.setState({isEditing: false});
                 this.props.deleteItem(this.props.id);

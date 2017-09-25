@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-
 // styles
 import '../App.css';
+
+import React, {Component} from 'react';
 
 // configs
 import {baseURL} from '../configs/config';

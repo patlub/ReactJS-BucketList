@@ -10,7 +10,6 @@ import {baseURL} from '../configs/config';
 import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-
 const initialState = {
     item: ''
 };

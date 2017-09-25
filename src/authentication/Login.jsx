@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
-
 // Styles
 import '../App.css';
+
+import React, {Component} from 'react';
+import {Link, Redirect} from 'react-router-dom';
 
 // configs
 import {baseURL} from '../configs/config';
