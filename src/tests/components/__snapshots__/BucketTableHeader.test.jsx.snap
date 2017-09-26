@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Displays bucket table header 1`] = `
+<thead>
+  <tr>
+    <th>
+      Bucket name
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Date Added
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+</thead>
+`;

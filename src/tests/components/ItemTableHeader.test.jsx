@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ItemTableHeader from '../components/ItemTableHeader';
+import ItemTableHeader from '../../components/ItemTableHeader';
 
 
 it('Displays item table header', () => {

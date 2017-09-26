@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import NavBar from '../components/NavBar';
+import NavBar from '../../components/NavBar';
 import { StaticRouter } from 'react-router';
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import BucketTableHeader from '../components/BucketTableHeader';
+import BucketTableHeader from '../../components/BucketTableHeader';
 
 
 it('Displays bucket table header', () => {
