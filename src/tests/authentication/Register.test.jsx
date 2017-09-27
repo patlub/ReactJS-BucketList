@@ -1,6 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import ReactTestUtils from 'react-dom/test-utils'; // ES6
+import { mount } from 'enzyme';
 import { StaticRouter } from 'react-router';
 import renderer from 'react-test-renderer';
 import Register from '../../authentication/Register';

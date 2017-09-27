@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ReactTestUtils from 'react-dom/test-utils'; // ES6
 import { StaticRouter } from 'react-router';
 import Login from '../../authentication/Login';
 import renderer from 'react-test-renderer';
@@ -48,7 +47,6 @@ describe('Component: Login', () => {
     expect(routerComponent.find('Login').nodes[0].state.email).toEqual('patrick@gmail.com');
     expect(routerComponent.find('Login').nodes[0].state.password).toEqual('patrick');
   });
-
   it('signs in user', () => {
     const loginButton = loginComponent.find('[type="submit"]');
     loginButton.simulate('submit');

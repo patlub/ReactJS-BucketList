@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component AddItem Displays BucketList component 1`] = `
+<tr>
+  <td
+    onClick={[Function]}
+  />
+  <td />
+  <td />
+  <td>
+    <span
+      className="glyphicon glyphicon-pencil edit"
+      onClick={[Function]}
+    />
+    <span
+      className="glyphicon glyphicon-trash remove"
+      onClick={[Function]}
+    />
+  </td>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <span />
+  </div>
+</tr>
+`;

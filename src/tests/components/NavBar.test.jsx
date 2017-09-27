@@ -6,7 +6,7 @@ import { StaticRouter } from 'react-router';
 
 it('Displays NavBar', () => {
   const rendered = renderer.create(
-    <StaticRouter location="logout" context={''}>
+    <StaticRouter location="logout" context={{}}>
       <NavBar />
     </StaticRouter>,
   );

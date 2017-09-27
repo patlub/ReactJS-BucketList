@@ -1,11 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import BucketList from '../../buckets/BucketList';
+import ItemList from '../../items/ItemList';
 
-
-it('Displays BucketList component', () => {
-  const rendered = renderer.create(
-    <BucketList />,
-  );
-  expect(rendered.toJSON()).toMatchSnapshot();
+describe('Component AddItem', () => {
+  it('Displays BucketList component', () => {
+    const rendered = renderer.create(
+      <ItemList />,
+    );
+    expect(rendered.toJSON()).toMatchSnapshot();
+  });
 });
