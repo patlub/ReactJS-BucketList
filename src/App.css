@@ -35,6 +35,7 @@
 .app-nav {
     background-color: #12a5a5;
     padding-left: 2%;
+    margin-bottom: 3%;
 }
 
 .nav-tab {
@@ -81,6 +82,7 @@
     color: green;
     font-size: large;
 }
+
 .bucket-name {
     color: blue;
 }
@@ -88,6 +90,26 @@
 .bucket-name:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.bucket-table{
+    width: 80%;
+}
+.add-text-box {
+    margin-right: 3%;
+}
+
+table {
+    margin-top: 3%;
+}
+
+.bucket-sec {
+    padding-top: 2%;
+}
+
+.item-sec {
+    border: 1px solid #dddddd;
+    padding-top: 2%;
 }
 
 @keyframes App-logo-spin {

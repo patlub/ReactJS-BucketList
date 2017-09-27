@@ -63,7 +63,7 @@ class AddItem extends Component {
     render() {
         return (
             <form className="form-inline" onSubmit={this.addItem}>
-                <div className="form-group">
+                <div className="form-group add-text-box">
                     <input
                         className="form-control"
                         type="text"

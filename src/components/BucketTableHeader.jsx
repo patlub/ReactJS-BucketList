@@ -10,7 +10,7 @@ function BucketTableHeader() {
         <th>Bucket name</th>
         <th>Description</th>
         <th>Date Added</th>
-        <th>Action</th>
+        <th width="70">Action</th>
       </tr>
     </thead>
   );

@@ -7,7 +7,7 @@ import '../App.css';
 function NavBar() {
   return (
     <div className="row app-nav">
-      <div className="col-md-8 col-sm-8 pull-left">
+      <div className="col-md-10 col-sm-10 pull-left">
         <h3 id="app-title">BucketList</h3>
       </div>
       <div className="col-md-2 col-sm-2 nav-tab text-center">
