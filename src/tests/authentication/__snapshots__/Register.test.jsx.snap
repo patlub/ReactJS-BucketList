@@ -87,13 +87,6 @@ exports[`Component: Register Displays Register 1`] = `
               >
                 Login
               </a>
-              <a
-                className="btn btn-link"
-                href="/forgot_password"
-                onClick={[Function]}
-              >
-                Forgot Password
-              </a>
             </div>
           </div>
         </form>
