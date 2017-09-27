@@ -26,6 +26,9 @@ class AddBucket extends Component {
         };
     }
 
+    /*
+    * set state to initial state
+    * */
     resetState = () => {
         this.setState(initialState);
     };
