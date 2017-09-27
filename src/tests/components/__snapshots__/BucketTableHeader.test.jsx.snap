@@ -12,7 +12,9 @@ exports[`Displays bucket table header 1`] = `
     <th>
       Date Added
     </th>
-    <th>
+    <th
+      width="70"
+    >
       Action
     </th>
   </tr>

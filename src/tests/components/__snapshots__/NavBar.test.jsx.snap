@@ -5,7 +5,7 @@ exports[`Displays NavBar 1`] = `
   className="row app-nav"
 >
   <div
-    className="col-md-8 col-sm-8 pull-left"
+    className="col-md-10 col-sm-10 pull-left"
   >
     <h3
       id="app-title"
