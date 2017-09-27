@@ -3,6 +3,7 @@
 exports[`Component AddItem Displays BucketList component 1`] = `
 <tr>
   <td
+    className="main-name"
     onClick={[Function]}
   />
   <td />
