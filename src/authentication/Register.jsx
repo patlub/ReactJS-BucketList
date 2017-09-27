@@ -108,7 +108,6 @@ class Register extends Component {
                                     </div>
                                     <div>
                                         <Link to="login" className="btn btn-link">Login</Link>
-                                        <Link to="forgot_password" className="btn btn-link">Forgot Password</Link>
                                     </div>
                                 </div>
                             </form>

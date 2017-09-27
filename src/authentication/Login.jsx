@@ -100,7 +100,6 @@ class Login extends Component {
                                         </div>
                                         <div>
                                             <Link to="register" className="btn btn-link">Register</Link>
-                                            <Link to="forgot_password" className="btn btn-link">Forgot Password</Link>
                                         </div>
                                     </div>
                                 </form>
