@@ -5,26 +5,30 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
+    "enzyme": "^2.9.1",
     "history": "^4.6.3",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
+    "react-addons-test-utils": "^15.6.0",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-notifications": "^1.4.3",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
+    "react-test-context": "^0.1.0",
     "react-test-renderer": "^15.6.1",
     "webpack": "^3.5.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --coverage --collectCoverageFrom=src/**/*jsx --collectCoverageFrom=!src/registerServiceWorker.js",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.9.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",

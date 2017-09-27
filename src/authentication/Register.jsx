@@ -36,7 +36,6 @@ class Register extends Component {
      * @param {event} event when triggering register action.
      */
     onRegisterClick = (event) => {
-        console.log(this.state);
         event.preventDefault();
         axios.post(`${baseURL}/auth/register`,
             {
