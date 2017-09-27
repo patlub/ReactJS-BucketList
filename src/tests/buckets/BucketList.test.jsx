@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ItemTableHeader from '../../components/ItemTableHeader';
+import BucketList from '../../buckets/BucketList';
 
 
-it('Displays item table header', () => {
+it('Displays BucketList component', () => {
   const rendered = renderer.create(
-    <ItemTableHeader />,
+    <BucketList />,
   );
   expect(rendered.toJSON()).toMatchSnapshot();
 });
