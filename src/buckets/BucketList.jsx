@@ -21,6 +21,9 @@ class BucketList extends Component {
         };
     }
 
+    /*
+    * set state to initial state
+    * */
     resetState = () => {
         this.setState({
             isEditing: false,
@@ -47,6 +50,9 @@ class BucketList extends Component {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios.get(`${baseURL}/items/${this.props.id}`)
             .then(function (response) {
+                if(response.data.length === 0){
+                    NotificationManager.warning('Bucket is Empty', 'Empty');
+                }
                 _.forEach(response.data, function (value) {
                     bucketListItems.push(value);
                 });
@@ -104,7 +110,9 @@ class BucketList extends Component {
         this.resetState();
     };
 
-    // Displays the actions operable on a bucket
+    /*
+    * Displays the actions operable on a bucket
+    * */
     renderActions = () => {
         if (this.state.isEditing) {
             return (
@@ -123,7 +131,9 @@ class BucketList extends Component {
         );
     };
 
-    // Displays the buckets
+    /*
+    * Displays the buckets
+    */
     renderBuckets = () => {
         if (this.state.isEditing) {
             return this.editingState();
@@ -139,7 +149,9 @@ class BucketList extends Component {
         );
     };
 
-    // Rendered when state isEditing is true
+    /*
+    * Rendered when state isEditing is true
+    */
     editingState = () => (
         <tr>
             <td>

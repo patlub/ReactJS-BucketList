@@ -10,16 +10,18 @@ import AddItem from '../items/AddItem';
 import BucketList from './BucketList';
 import ItemList from '../items/ItemList';
 
-//Third party library
+// Third party library
 import _ from 'lodash';
+
+// configs
 import {baseURL} from '../configs/config';
 
-//stateless components
+// stateless components
 import NavBar from '../components/NavBar';
 import BucketTableHeader from '../components/BucketTableHeader';
 import ItemtableHeader from '../components/ItemTableHeader';
 
-//configs
+// configs
 import axios from 'axios'
 
 let bucketLists = [];
@@ -70,9 +72,9 @@ class Buckets extends Component {
 
         // Display the buckets
         return (
-            <div className="col-md-7 col-sm-12 col-xs-12">
+            <div className="col-md-7 col-sm-12 col-xs-12 bucket-sec">
                 <AddBucket addBucket={this.addBucket}/>
-                <table className="table table-responsive table-striped">
+                <table className="table table-responsive table-striped bucket-table" width="20%">
                     <BucketTableHeader/>
                     <tbody>
                     {this.renderBuckets()}
@@ -96,37 +98,23 @@ class Buckets extends Component {
 
     itemSection = () => {
         // If there are no items
-        if (this.state.items.length === 0) {
-            return this.emptyBucketSection();
+        if (this.state.items.length !== 0) {
+            // Display the items
+            return (
+                <div className="col-md-5 col-sm-12 col-xs-12 item-sec">
+                    <AddItem
+                        bucketId={this.state.bucketId}
+                        addItem={this.addItem}/>
+                    <table className="table table-responsive table-striped">
+                        <ItemtableHeader/>
+                        <tbody>
+                        {this.renderItems()}
+                        </tbody>
+                    </table>
+                </div>
+            );
         }
-
-        // Display the items
-        return (
-            <div className="col-md-5 col-sm-12 col-xs-12">
-                <AddItem
-                    bucketId={this.state.bucketId}
-                    addItem={this.addItem}/>
-                <table className="table table-responsive table-striped">
-                    <ItemtableHeader/>
-                    <tbody>
-                    {this.renderItems()}
-                    </tbody>
-                </table>
-            </div>
-        );
     };
-
-    /*
-    * Rendered if the bucket has no items
-    * */
-    emptyBucketSection = () => (
-        <div className="col-md-5 col-sm-12 col-xs-12">
-            <AddItem
-                bucketId={this.state.bucketId}
-                addItem={this.addItem}/>
-            <div className="col-sm-7">Bucket is Empty</div>
-        </div>
-    );
 
     /*
     *

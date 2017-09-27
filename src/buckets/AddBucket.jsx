@@ -66,9 +66,9 @@ class AddBucket extends Component {
     render() {
         return (
             <form className="form-inline" onSubmit={this.onAddBucketHandler}>
-                <div className="form-group">
+                <div className="form-group add-text-box">
                     <input
-                        className="form-control"
+                        className="form-control add-text-box"
                         type="text"
                         name="bucket"
                         value={this.state.bucket}
@@ -77,7 +77,7 @@ class AddBucket extends Component {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group add-text-box">
                     <input
                         className="form-control"
                         type="text"
