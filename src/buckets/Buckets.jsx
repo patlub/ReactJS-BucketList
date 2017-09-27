@@ -34,6 +34,7 @@ class Buckets extends Component {
             buckets: [],
             items: [],
             bucketId: '',
+            bucketClicked: false,
         };
     }
 
@@ -98,7 +99,15 @@ class Buckets extends Component {
 
     itemSection = () => {
         // If there are no items
-        if (this.state.items.length !== 0) {
+        console.log(this.state.bucketClicked);
+        console.log(this.state.items.length);
+        if (this.state.bucketClicked && this.state.items.length === 0) {
+            return (
+                <AddItem
+                    bucketId={this.state.bucketId}
+                    addItem={this.addItem}/>
+            );
+        }else if(this.state.bucketClicked && this.state.items.length !== 0) {
             // Display the items
             return (
                 <div className="col-md-5 col-sm-12 col-xs-12 item-sec">
@@ -114,6 +123,7 @@ class Buckets extends Component {
                 </div>
             );
         }
+
     };
 
     /*
@@ -164,7 +174,11 @@ class Buckets extends Component {
         _.remove(bucketLists, function (o) {
             return o.id === bucketId
         });
-        this.setState({buckets: bucketLists})
+        this.setState({
+            buckets: bucketLists,
+            bucketClicked: false,
+            items
+        })
     };
 
     /*
@@ -178,6 +192,7 @@ class Buckets extends Component {
         this.setState({
             items,
             bucketId: bucketId,
+            bucketClicked: true,
         })
     };
 

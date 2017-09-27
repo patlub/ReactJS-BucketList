@@ -163,7 +163,7 @@ class ItemList extends Component {
     * */
     sectionForItem = () => (
         <tr>
-            <td onClick={this.changeStatus}>
+            <td onClick={this.changeStatus} className="main-name">
                 {this.state.name}
             </td>
             {this.itemStatus()}
