@@ -83,11 +83,11 @@
     font-size: large;
 }
 
-.bucket-name {
+.main-name {
     color: blue;
 }
 
-.bucket-name:hover {
+.main-name:hover {
     cursor: pointer;
     text-decoration: underline;
 }
