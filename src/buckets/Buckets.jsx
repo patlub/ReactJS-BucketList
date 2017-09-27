@@ -10,16 +10,16 @@ import AddItem from '../items/AddItem';
 import BucketList from './BucketList';
 import ItemList from '../items/ItemList';
 
-// Third party library
+//Third party library
 import _ from 'lodash';
 import {baseURL} from '../configs/config';
 
-// stateless components
+//stateless components
 import NavBar from '../components/NavBar';
 import BucketTableHeader from '../components/BucketTableHeader';
 import ItemtableHeader from '../components/ItemTableHeader';
 
-// configs
+//configs
 import axios from 'axios'
 
 let bucketLists = [];

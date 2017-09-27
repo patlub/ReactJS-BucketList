@@ -46,12 +46,11 @@ class AddBucket extends Component {
      */
     onAddBucketHandler = (event) => {
         event.preventDefault();
-
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios.post(`${baseURL}/buckets`,
             {
                 bucket: this.state.bucket,
-                desc: this.state.desc
+                desc: this.state.desc,
             })
             .then((response) => {
                 this.props.addBucket(response.data);
