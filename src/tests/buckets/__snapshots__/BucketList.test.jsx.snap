@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Displays BucketList component 1`] = `
+exports[`Component: Login Displays BucketList component 1`] = `
 <tr>
   <td
     className="main-name"
@@ -18,10 +18,5 @@ exports[`Displays BucketList component 1`] = `
       onClick={[Function]}
     />
   </td>
-  <div
-    className="notification-container notification-container-empty"
-  >
-    <span />
-  </div>
 </tr>
 `;
