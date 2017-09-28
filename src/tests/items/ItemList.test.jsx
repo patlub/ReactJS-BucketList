@@ -25,6 +25,8 @@ global.localStorage = {
   setItem: () => {},
 };
 
+global.confirm = () => true;
+
 describe('Component: Login', () => {
   const props = {
     id: 1,
