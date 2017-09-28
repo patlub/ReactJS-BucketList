@@ -97,7 +97,7 @@ class ItemList extends Component {
                 this.props.deleteItem(this.props.id);
                 NotificationManager.success(`Item Deleted`, `Deleted`);
             })
-            .catch((error) => {
+            .catch(() => {
                 NotificationManager.error(`Could not delete item`, `Error`);
             });
     };
