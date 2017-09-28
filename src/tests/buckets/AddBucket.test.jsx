@@ -11,7 +11,7 @@ const MockAdapter = require('axios-mock-adapter');
 
 // This sets the mock adapter on the default instance
 const mock = new MockAdapter(axios);
-// Mock Login POST request to /login
+// Mock buckets POST request to /buckets
 mock.onPost(`${baseURL}/buckets`).reply(200, {
 });
 
@@ -21,8 +21,8 @@ global.localStorage = {
 };
 
 describe('Component: Login', () => {
-  const addBucket = (param) => {};
-  const addBucketComponent = mount(<AddBucket addBucket={addBucket} />);
+  const addBucketMock = jest.fn();
+  const addBucketComponent = mount(<AddBucket addBucket={addBucketMock} />);
   const bucketNameInput = addBucketComponent.find('[type="text"]').at(0);
   const bucketDescInput = addBucketComponent.find('[type="text"]').at(1);
   const addBucketButton = addBucketComponent.find('[type="submit"]');
@@ -41,5 +41,6 @@ describe('Component: Login', () => {
   });
   it('Adds a bucket', () => {
     addBucketButton.simulate('submit');
+    expect(addBucketMock.mock.calls.length === 1);
   });
 });
