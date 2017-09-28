@@ -97,7 +97,7 @@ class BucketList extends Component {
                 this.props.deleteBucket(this.props.id);
                 NotificationManager.success(`Bucket Deleted`, `Deleted`);
             })
-            .catch((error) => {
+            .catch(() => {
                 NotificationManager.error(`Could not delete bucket`, `Error`);
             });
     };
