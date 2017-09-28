@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router';
 import renderer from 'react-test-renderer';
 import Register from '../../authentication/Register';
 import { baseURL } from '../../configs/config';
+import register from "../../registerServiceWorker";
 
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
@@ -33,6 +34,7 @@ describe('Component: Register', () => {
   const nameInput = registerComponent.find('[type="text"]');
   const emailInput = registerComponent.find('[type="email"]');
   const passwordInput = registerComponent.find('[type="password"]');
+  const register = registerComponent.nodes[0];
 
   it('Displays Register', () => {
     const rendered = renderer.create(
@@ -48,9 +50,9 @@ describe('Component: Register', () => {
     emailInput.simulate('change', { target: { name: 'email', value: 'patrick@gmail.com' } });
     passwordInput.simulate('change', { target: { name: 'password', value: 'secret' } });
 
-    expect(routerComponent.find('Register').nodes[0].state.name).toEqual('patrick');
-    expect(routerComponent.find('Register').nodes[0].state.email).toEqual('patrick@gmail.com');
-    expect(routerComponent.find('Register').nodes[0].state.password).toEqual('secret');
+    expect(register.state.name).toEqual('patrick');
+    expect(register.state.email).toEqual('patrick@gmail.com');
+    expect(register.state.password).toEqual('secret');
   });
 
   it('signs up user', () => {
