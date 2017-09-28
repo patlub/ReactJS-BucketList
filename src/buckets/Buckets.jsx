@@ -99,8 +99,6 @@ class Buckets extends Component {
 
     itemSection = () => {
         // If there are no items
-        console.log(this.state.bucketClicked);
-        console.log(this.state.items.length);
         if (this.state.bucketClicked && this.state.items.length === 0) {
             return (
                 <AddItem

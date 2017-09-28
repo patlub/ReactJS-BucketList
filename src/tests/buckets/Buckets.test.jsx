@@ -20,13 +20,16 @@ mock.onGet(`${baseURL}/buckets`).reply(200, {
 
 global.localStorage = {
   getItem: () => {},
+  setItem: () => {},
 };
 
-it('Displays Buckets component', () => {
-  const rendered = renderer.create(
-    <StaticRouter context={{}}>
-      <Buckets />
-    </StaticRouter>,
-  );
-  expect(rendered.toJSON()).toMatchSnapshot();
+describe('Component: Login', () => {
+  it('Displays Buckets component', () => {
+    const rendered = renderer.create(
+      <StaticRouter context={{}}>
+        <Buckets />
+      </StaticRouter>,
+    );
+    expect(rendered.toJSON()).toMatchSnapshot();
+  });
 });

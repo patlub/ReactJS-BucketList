@@ -90,16 +90,19 @@ class ItemList extends Component {
     * */
     onDeleteClick = (event) => {
         event.preventDefault();
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.delete(`${baseURL}/items/${this.props.id}`)
-            .then(() => {
-                this.setState({isEditing: false});
-                this.props.deleteItem(this.props.id);
-                NotificationManager.success(`Item Deleted`, `Deleted`);
-            })
-            .catch((error) => {
-                NotificationManager.error(`Could not delete item`, `Error`);
-            });
+        //eslint-disable-next-line
+        if (confirm(`Are you sure you want to delete item ${this.state.name}`)) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+            axios.delete(`${baseURL}/items/${this.props.id}`)
+                .then(() => {
+                    this.setState({isEditing: false});
+                    this.props.deleteItem(this.props.id);
+                    NotificationManager.success(`Item Deleted`, `Deleted`);
+                })
+                .catch(() => {
+                    NotificationManager.error(`Could not delete item`, `Error`);
+                });
+        }
     };
 
     onEditClick = () => {
