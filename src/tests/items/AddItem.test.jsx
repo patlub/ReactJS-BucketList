@@ -21,8 +21,8 @@ global.localStorage = {
 };
 
 describe('Component: Login', () => {
-  const addItem = (param) => {};
-  const addItemComponent = mount(<AddItem bucketId={1} addItem={addItem} />);
+  const addItemMock = jest.fn();
+  const addItemComponent = mount(<AddItem bucketId={1} addItem={addItemMock} />);
   const ItemNameInput = addItemComponent.find('[type="text"]');
   const addItemButton = addItemComponent.find('[type="submit"]');
 
@@ -38,5 +38,6 @@ describe('Component: Login', () => {
   });
   it('Adds an Item', () => {
     addItemButton.simulate('submit');
+    expect(addItemMock.mock.calls.length === 1);
   });
 });

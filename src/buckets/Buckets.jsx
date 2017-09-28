@@ -105,7 +105,7 @@ class Buckets extends Component {
                     bucketId={this.state.bucketId}
                     addItem={this.addItem}/>
             );
-        }else if(this.state.bucketClicked && this.state.items.length !== 0) {
+        } else if (this.state.bucketClicked && this.state.items.length !== 0) {
             // Display the items
             return (
                 <div className="col-md-5 col-sm-12 col-xs-12 item-sec">
@@ -144,7 +144,7 @@ class Buckets extends Component {
     * */
     addBucket = (bucket) => {
         bucketLists.push(bucket);
-        this.setState({buckets: bucketLists})
+        this.setState({buckets: bucketLists});
     };
 
     /*

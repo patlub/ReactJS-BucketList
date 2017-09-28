@@ -44,8 +44,8 @@ describe('Component: Login', () => {
   it('updates state on input change', () => {
     emailInput.simulate('change', { target: { name: 'email', value: 'patrick@gmail.com' } });
     passwordInput.simulate('change', { target: { name: 'password', value: 'patrick' } });
-    expect(routerComponent.find('Login').nodes[0].state.email).toEqual('patrick@gmail.com');
-    expect(routerComponent.find('Login').nodes[0].state.password).toEqual('patrick');
+    expect(loginComponent.nodes[0].state.email).toEqual('patrick@gmail.com');
+    expect(loginComponent.nodes[0].state.password).toEqual('patrick');
   });
   it('signs in user', () => {
     const loginButton = loginComponent.find('[type="submit"]');
