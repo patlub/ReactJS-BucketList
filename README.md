@@ -1,4 +1,7 @@
 
+[![Build Status](https://travis-ci.org/patlub/ReactJS-BucketList.svg?branch=staging)](https://travis-ci.org/patlub/ReactJS-BucketList)
+[![Coverage Status](https://coveralls.io/repos/github/patlub/ReactJS-BucketList/badge.svg?branch=dev)](https://coveralls.io/github/patlub/ReactJS-BucketList?branch=dev)
+
 ## BucketList Application
 
 #### Create Buckets and Add Items to Them
