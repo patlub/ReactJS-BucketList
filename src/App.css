@@ -1,24 +1,122 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
+}
+
+.auth-box {
+    margin-top: 10%;
+}
+
+#add-bkt-btn {
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+#logout-btn {
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+.app-nav {
+    background-color: #12a5a5;
+    padding-left: 2%;
+    margin-bottom: 3%;
+}
+
+.nav-tab {
+    margin-top: 2%;
+    color: white;
+}
+
+.nav-tab a {
+    color: white !important;
+}
+
+#app-title {
+    color: #ffffff;
+}
+
+.action-btn {
+    margin-right: 2%;
+}
+
+.edit {
+    color: blue;
+    font-size: large;
+    padding-right: 30%;
+}
+
+.remove {
+    color: red;
+    font-size: large;
+
+}
+
+.save {
+    color: green;
+    font-size: large;
+    padding-right: 30%;
+}
+
+.cancel {
+    color: black;
+    font-size: large;
+}
+
+.done {
+    color: green;
+    font-size: large;
+}
+
+.main-name {
+    color: blue;
+}
+
+.main-name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bucket-table{
+    width: 80%;
+}
+.add-text-box {
+    margin-right: 3%;
+}
+
+table {
+    margin-top: 3%;
+}
+
+.bucket-sec {
+    padding-top: 2%;
+}
+
+.item-sec {
+    border: 1px solid #dddddd;
+    padding-top: 2%;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

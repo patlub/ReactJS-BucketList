@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Login Displays AddItem component 1`] = `
+<form
+  className="form-inline"
+  onSubmit={[Function]}
+>
+  <div
+    className="form-group add-text-box"
+  >
+    <input
+      className="form-control"
+      name="item"
+      onChange={[Function]}
+      placeholder="item name"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn btn-primary"
+      type="submit"
+    >
+      Add Item
+    </button>
+  </div>
+</form>
+`;

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Login Displays AddBucket component 1`] = `
+<form
+  className="form-inline"
+  onSubmit={[Function]}
+>
+  <div
+    className="form-group add-text-box"
+  >
+    <input
+      className="form-control add-text-box"
+      name="bucket"
+      onChange={[Function]}
+      placeholder="Bucket name"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-group add-text-box"
+  >
+    <input
+      className="form-control"
+      name="desc"
+      onChange={[Function]}
+      placeholder="Description"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn btn-primary"
+      type="submit"
+    >
+      Add Bucket
+    </button>
+  </div>
+</form>
+`;
