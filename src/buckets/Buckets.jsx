@@ -31,6 +31,7 @@ class Buckets extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loggedIn: localStorage.getItem('token'),
             buckets: [],
             items: [],
             bucketId: '',
@@ -38,18 +39,19 @@ class Buckets extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        bucketLists = [];
         this.getBuckets()
             .then((allbucketLists) => {
-                bucketLists = allbucketLists;
-                this.setState({buckets: bucketLists})
+                    bucketLists = allbucketLists;
+                    this.setState({buckets: bucketLists})
             })
             .catch(err => console.log(err))
     }
 
     render() {
         // Check if they are logged in
-        if (!localStorage.getItem('token')) {
+        if (!this.state.loggedIn) {
             return <Redirect to="/login"/>
         }
         // Show both buckets and items

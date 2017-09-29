@@ -15,11 +15,12 @@ const mock = new MockAdapter(axios);
 // Mock buckets GET request to /buckets
 let buckets = [{
   id: 1,
-  name: 'John Smith',
+  name: 'Travel',
   desc: 'cities',
   date_added: '20-09-17',
   user_id: 1,
 }];
+
 mock.onGet(`${baseURL}/buckets`).reply(200, buckets);
 
 global.localStorage = {
@@ -71,5 +72,46 @@ describe('Component: Buckets', () => {
     expect(bucketsComponent.state.buckets.length).toEqual(2);
     bucketsComponent.deleteBucket(2);
     expect(bucketsComponent.state.buckets.length).toEqual(1);
+  });
+  it('can fetch items', () => {
+    const items = [{
+      id: 1,
+      name: 'Go to Nairobi',
+      status: 'false',
+      date_added: '20-09-17',
+      buckedId: 1,
+    }];
+    expect(bucketsComponent.state.items.length).toEqual(0);
+    bucketsComponent.getItems(items, 1);
+    expect(bucketsComponent.state.items.length).toEqual(1);
+  });
+  it('can add an item', () => {
+    const newItem = {
+      id: 2,
+      name: 'Go to Kampala',
+      status: 'true',
+      date_added: '20-09-17',
+      buckedId: 1,
+    };
+    expect(bucketsComponent.state.items.length).toEqual(1);
+    bucketsComponent.addItem(newItem, 1);
+    expect(bucketsComponent.state.items.length).toEqual(2);
+  });
+  it('can update items', () => {
+    const updatedItem = {
+      id: 3,
+      name: 'updated name',
+      status: 'true',
+      date_added: '20-09-17',
+      buckedId: 1,
+    };
+    expect(bucketsComponent.state.items[0].name).toEqual('Go to Nairobi');
+    bucketsComponent.updateItems(updatedItem, 1);
+    expect(bucketsComponent.state.items[0].name).toEqual('updated name');
+  });
+  it('can delete item', () => {
+    expect(bucketsComponent.state.items.length).toEqual(2);
+    bucketsComponent.deleteItem(2);
+    expect(bucketsComponent.state.items.length).toEqual(1);
   });
 });

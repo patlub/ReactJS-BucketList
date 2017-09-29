@@ -45,8 +45,8 @@ class Register extends Component {
             })
             .then(function (response) {
                 if (response.status === 201) {
-                    localStorage.setItem('token', response.data.id);
-                    this.setState({loggedIn: response.data.id});
+                    localStorage.setItem('token', response.data.token);
+                    this.setState({loggedIn: response.data.token});
                 }
             }.bind(this))
             .catch(function (error) {
