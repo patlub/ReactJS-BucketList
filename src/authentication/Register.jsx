@@ -9,6 +9,7 @@ import {baseURL} from '../configs/config';
 
 // Third party
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Register extends Component {
     constructor(props) {
@@ -49,8 +50,8 @@ class Register extends Component {
                     this.setState({loggedIn: response.data.token});
                 }
             }.bind(this))
-            .catch(function (error) {
-                console.log(error);
+            .catch(function () {
+                NotificationManager.error(`Email already exists`);
             });
     };
 
@@ -114,6 +115,7 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
+                <NotificationContainer/>
             </div>
         );
     }

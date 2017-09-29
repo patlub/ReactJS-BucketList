@@ -9,6 +9,7 @@ import {baseURL} from '../configs/config';
 
 // Third party
 import axios from 'axios'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Login extends Component {
     constructor(props) {
@@ -46,8 +47,8 @@ class Login extends Component {
                 localStorage.setItem('token', response.data.token);
                 this.setState({loggedIn: response.data.token});
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                NotificationManager.error(`Invalid username or password`);
             });
 
     };
@@ -107,6 +108,7 @@ class Login extends Component {
                             </div>
                         </div>
                     </div>
+                    <NotificationContainer/>
                 </div>
             );
         }
