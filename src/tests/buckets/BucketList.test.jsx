@@ -60,18 +60,13 @@ describe('Component: Login', () => {
     editIconBtn.simulate('click');
     expect(bucketListComponent.state().isEditing).toEqual(true);
   });
-  it('sets isEditing state to true', () => {
-    editIconBtn.simulate('click');
-    const cancelIconBtn = bucketListComponent.find('span.cancel');
-    cancelIconBtn.simulate('click');
-    expect(bucketListComponent.state().isEditing).toEqual(false);
-  });
   it('sets isEditing state to false', () => {
     editIconBtn.simulate('click');
     const cancelIconBtn = bucketListComponent.find('span.cancel');
     cancelIconBtn.simulate('click');
     expect(bucketListComponent.state().isEditing).toEqual(false);
   });
+
   it('sets state on input changed', () => {
     editIconBtn.simulate('click');
     const bucketNameInput = bucketListComponent.find('[type="text"]').at(0);

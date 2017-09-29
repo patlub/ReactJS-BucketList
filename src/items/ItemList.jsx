@@ -35,8 +35,8 @@ class ItemList extends Component {
     };
 
     /*
-    * Updates a bucket
-    * @param {event} event fired when updating bucket
+    * Updates an item
+    * @param {event} event fired when updating an item
     * */
     onSaveClick = (event) => {
         event.preventDefault();
@@ -57,8 +57,8 @@ class ItemList extends Component {
     };
 
     /*
-    * Changes bucket status
-    * @param {event} event fired when changing bucket status
+    * Changes item status
+    * @param {event} event fired when changing item status
     * */
     changeStatus = (event) => {
         event.preventDefault();
@@ -85,8 +85,8 @@ class ItemList extends Component {
     };
 
     /*
-    * Deletes a bucket
-    * @param {event} event fired when deleting a bucket
+    * Deletes an item
+    * @param {event} event fired when deleting an item
     * */
     onDeleteClick = (event) => {
         event.preventDefault();
@@ -144,7 +144,7 @@ class ItemList extends Component {
     };
 
     /*
-    * Rendered when bucket item is being edited
+    * Rendered when item is being edited
     * */
     editItemSection = () => (
         <tr>

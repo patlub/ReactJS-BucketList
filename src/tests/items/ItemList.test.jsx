@@ -56,12 +56,6 @@ describe('Component: Login', () => {
     editIconBtn.simulate('click');
     expect(itemListComponent.state().isEditing).toEqual(true);
   });
-  it('sets isEditing state to true', () => {
-    editIconBtn.simulate('click');
-    const cancelIconBtn = itemListComponent.find('span.cancel');
-    cancelIconBtn.simulate('click');
-    expect(itemListComponent.state().isEditing).toEqual(false);
-  });
   it('sets isEditing state to false', () => {
     editIconBtn.simulate('click');
     const cancelIconBtn = itemListComponent.find('span.cancel');
