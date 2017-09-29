@@ -93,5 +93,10 @@ exports[`Component: Register Displays Register 1`] = `
       </div>
     </div>
   </div>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <span />
+  </div>
 </div>
 `;
